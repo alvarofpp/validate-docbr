@@ -32,7 +32,7 @@ class CPF(BaseDoc):
         """Gerar o primeiro dígito verificador do CPF."""
         sum = 0
 
-        for i in list(range(10, 1, -1)):
+        for i in range(10, 1, -1):
             sum += int(doc[10 - i]) * i
 
         sum = (sum * 10) % 11
@@ -46,7 +46,7 @@ class CPF(BaseDoc):
         """Gerar o segundo dígito verificador do CPF."""
         sum = 0
 
-        for i in list(range(11, 1, -1)):
+        for i in range(11, 1, -1):
             sum += int(doc[11-i]) * i
 
         sum = (sum * 10) % 11

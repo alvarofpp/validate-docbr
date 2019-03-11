@@ -1,6 +1,7 @@
 README.md
 setup.py
 validate_docbr/BaseDoc.py
+validate_docbr/CNPJ.py
 validate_docbr/CPF.py
 validate_docbr/__init__.py
 validate_docbr.egg-info/PKG-INFO
@@ -8,4 +9,5 @@ validate_docbr.egg-info/SOURCES.txt
 validate_docbr.egg-info/dependency_links.txt
 validate_docbr.egg-info/top_level.txt
 validate_docbr/test/__init__.py
+validate_docbr/test/t_CNPJ.py
 validate_docbr/test/t_CPF.py
