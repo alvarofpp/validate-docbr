@@ -1,2 +1,3 @@
 .idea/*
 venv/*
+validate_docbr/__pycache__/*
