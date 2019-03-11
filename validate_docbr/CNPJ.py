@@ -16,6 +16,10 @@ class CNPJ(BaseDoc):
         if len(doc) != 14:
             return False
 
+        for i in range(10):
+            if doc.count("{}".format(i)) == 14:
+                return False
+
         return self._generate_first_digit(doc) == doc[12]\
                and self._generate_second_digit(doc) == doc[13]
 

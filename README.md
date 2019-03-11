@@ -1,6 +1,11 @@
 # validate-docbr
 Pacote Python para validação de documentos brasileiros.
 
+Para instalar o pacote:
+```bash
+pip install validate-docbr
+```
+
 ## Documentos
 Documentos que estão no pacote:
 
