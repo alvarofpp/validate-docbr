@@ -1,4 +1,8 @@
 # validate-docbr
+<a href="https://pypi.org/project/pandas/">
+  <img src="https://img.shields.io/pypi/v/validate-docbr.svg" alt="latest release" />
+</a>
+
 Pacote Python para validação de documentos brasileiros.
 
 Para instalar o pacote:
