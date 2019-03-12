@@ -70,6 +70,7 @@ class CNS(BaseDoc):
         return cns
 
     def _generate_second_case(self, cns):
+        """Gera um CNS válido para os casos que se inicia com 7, 8 ou 9."""
         # Gerar os próximos 14 dígitos
         cns = cns + [str(sample(list(range(10)), 1)[0]) for i in range(14)]
         sum = self._sum_algorithm(cns)
@@ -82,8 +83,7 @@ class CNS(BaseDoc):
         diff = 11 - rest
 
         # Verificar qual é o mais próximo
-        cns = self._change_cns(cns, 15 - diff, diff)
-        return cns
+        return self._change_cns(cns, 15 - diff, diff)
 
     def _change_cns(self, cns, i, val):
         """Altera o CNS recursivamente para que atenda as especificações de validade dele."""
