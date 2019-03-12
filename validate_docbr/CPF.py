@@ -10,7 +10,6 @@ class CPF(BaseDoc):
 
     def validate(self, doc):
         """Validar CPF."""
-
         if len(doc) != 11:
             return False
 

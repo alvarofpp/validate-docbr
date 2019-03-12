@@ -11,6 +11,7 @@ Documentos que estão no pacote:
 
 - [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF)
 - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ)
+- [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS)
 
 Para entender melhor os documentos e suas respectivas classes, basta acessar a parte de Wiki do projeto.
 
@@ -41,5 +42,20 @@ cnpj = CNPJ()
 new_cnpj = cnpj.generate()
 # Validar CNPJ
 cnpj.validate(new_cnpj)
+
+```
+
+### CNS
+Cartão Nacional de Saúde.
+
+```python
+from validate_docbr import CNS
+
+cns = CNS()
+
+# Gerar novo CNS
+new_cns = cns.generate()
+# Validar CNS
+cns.validate(new_cns)
 
 ```

@@ -12,7 +12,6 @@ class CNPJ(BaseDoc):
 
     def validate(self, doc):
         """Validar CNPJ."""
-
         if len(doc) != 14:
             return False
 

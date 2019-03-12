@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: validate-docbr
-Version: 0.2.0
+Version: 0.3.0
 Summary: Validate brazilian documents.
 Home-page: https://github.com/alvarofpp/validate-docbr
 Author: Álvaro Ferreira Pires de Paiva
@@ -19,6 +19,7 @@ Description: # validate-docbr
         
         - [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF)
         - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ)
+        - [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS)
         
         Para entender melhor os documentos e suas respectivas classes, basta acessar a parte de Wiki do projeto.
         
@@ -49,6 +50,21 @@ Description: # validate-docbr
         new_cnpj = cnpj.generate()
         # Validar CNPJ
         cnpj.validate(new_cnpj)
+        
+        ```
+        
+        ### CNS
+        Cartão Nacional de Saúde.
+        
+        ```python
+        from validate_docbr import CNS
+        
+        cns = CNS()
+        
+        # Gerar novo CNS
+        new_cns = cns.generate()
+        # Validar CNS
+        cns.validate(new_cns)
         
         ```
 Platform: UNKNOWN
