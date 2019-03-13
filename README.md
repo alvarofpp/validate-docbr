@@ -1,5 +1,5 @@
 # validate-docbr
-<a href="https://pypi.org/project/pandas/">
+<a href="https://pypi.org/project/validate-docbr/">
   <img src="https://img.shields.io/pypi/v/validate-docbr.svg" alt="latest release" />
 </a>
 
