@@ -10,8 +10,10 @@ class CNPJ(BaseDoc):
         self.weights_first = list(range(5, 1, -1)) + list(range(9, 1, -1))
         self.weights_second = list(range(6, 1, -1)) + list(range(9, 1, -1))
 
-    def validate(self, doc):
+    def validate(self, doc: str) -> bool:
         """Validar CNPJ."""
+        doc = self._only_digits(doc)
+
         if len(doc) != 14:
             return False
 
@@ -22,7 +24,7 @@ class CNPJ(BaseDoc):
         return self._generate_first_digit(doc) == doc[12]\
                and self._generate_second_digit(doc) == doc[13]
 
-    def generate(self):
+    def generate(self, mask: bool = False) -> str:
         """Gerar CNPJ."""
         # Os doze primeiros dígitos
         cnpj = [str(sample(self.digits, 1)[0]) for i in range(12)]
@@ -31,9 +33,13 @@ class CNPJ(BaseDoc):
         cnpj.append(self._generate_first_digit(cnpj))
         cnpj.append(self._generate_second_digit(cnpj))
 
-        return "".join(cnpj)
+        cnpj = "".join(cnpj)
+        if mask:
+            return "53.977.783/0001-24".format(cnpj[:2], cnpj[2:5], cnpj[5:8], cnpj[8:12], cnpj[-2:])
 
-    def _generate_first_digit(self, doc):
+        return cnpj
+
+    def _generate_first_digit(self, doc: (str, list)) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""
         sum = 0
 
@@ -49,7 +55,7 @@ class CNPJ(BaseDoc):
 
         return str(sum)
 
-    def _generate_second_digit(self, doc):
+    def _generate_second_digit(self, doc: (str, list)) -> str:
         """Gerar o segundo dígito verificador do CNPJ."""
         sum = 0
 

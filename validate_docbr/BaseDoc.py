@@ -4,10 +4,14 @@ from abc import ABC
 class BaseDoc(ABC):
     """Classe base para todas as classes referentes a documentos."""
 
-    def validate(self, doc):
+    def validate(self, doc: str) -> bool:
         """Método para validar o documento desejado."""
-        return
+        pass
 
-    def generate(self):
+    def generate(self, mask: bool = False) -> str:
         """Método para gerar um documento válido."""
-        return
+        pass
+
+    def _only_digits(self, doc: str) -> str:
+        """Remove os outros caracteres que não sejam dígitos."""
+        return "".join([x for x in doc if x.isdigit()])

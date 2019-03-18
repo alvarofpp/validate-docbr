@@ -8,15 +8,17 @@ class CPF(BaseDoc):
     def __init__(self):
         self.digits = list(range(10))
 
-    def validate(self, doc):
+    def validate(self, doc: str) -> bool:
         """Validar CPF."""
+        doc = list(self._only_digits(doc))
+
         if len(doc) != 11:
             return False
 
         return self._generate_first_digit(doc) == doc[9]\
                and self._generate_second_digit(doc) == doc[10]
 
-    def generate(self):
+    def generate(self, mask: bool = False) -> str:
         """Gerar CPF."""
         # Os nove primeiros dígitos
         cpf = [str(sample(self.digits, 1)[0]) for i in range(9)]
@@ -25,9 +27,13 @@ class CPF(BaseDoc):
         cpf.append(self._generate_first_digit(cpf))
         cpf.append(self._generate_second_digit(cpf))
 
-        return "".join(cpf)
+        cpf = "".join(cpf)
+        if mask:
+            return "{}.{}.{}-{}".format(cpf[:3], cpf[3:6], cpf[6:9], cpf[-2:])
 
-    def _generate_first_digit(self, doc):
+        return cpf
+
+    def _generate_first_digit(self, doc: list) -> str:
         """Gerar o primeiro dígito verificador do CPF."""
         sum = 0
 
@@ -41,7 +47,7 @@ class CPF(BaseDoc):
 
         return str(sum)
 
-    def _generate_second_digit(self, doc):
+    def _generate_second_digit(self, doc: list) -> str:
         """Gerar o segundo dígito verificador do CPF."""
         sum = 0
 

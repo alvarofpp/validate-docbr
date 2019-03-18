@@ -9,7 +9,6 @@ validate_docbr.egg-info/PKG-INFO
 validate_docbr.egg-info/SOURCES.txt
 validate_docbr.egg-info/dependency_links.txt
 validate_docbr.egg-info/top_level.txt
-validate_docbr/test/__init__.py
 validate_docbr/test/t_CNPJ.py
 validate_docbr/test/t_CNS.py
 validate_docbr/test/t_CPF.py

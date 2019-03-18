@@ -1,12 +1,16 @@
 Metadata-Version: 2.1
 Name: validate-docbr
-Version: 0.3.0
+Version: 1.0.0
 Summary: Validate brazilian documents.
 Home-page: https://github.com/alvarofpp/validate-docbr
 Author: Álvaro Ferreira Pires de Paiva
 Author-email: alvarofepipa@gmail.com
 License: UNKNOWN
 Description: # validate-docbr
+        <a href="https://pypi.org/project/validate-docbr/">
+          <img src="https://img.shields.io/pypi/v/validate-docbr.svg" alt="latest release" />
+        </a>
+        
         Pacote Python para validação de documentos brasileiros.
         
         Para instalar o pacote:
@@ -67,6 +71,7 @@ Description: # validate-docbr
         cns.validate(new_cns)
         
         ```
+        
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
