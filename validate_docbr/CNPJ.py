@@ -1,5 +1,6 @@
 from .BaseDoc import BaseDoc
 from random import sample
+from typing import Union
 
 
 class CNPJ(BaseDoc):
@@ -39,7 +40,7 @@ class CNPJ(BaseDoc):
 
         return cnpj
 
-    def _generate_first_digit(self, doc: (str, list)) -> str:
+    def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""
         sum = 0
 
@@ -55,7 +56,7 @@ class CNPJ(BaseDoc):
 
         return str(sum)
 
-    def _generate_second_digit(self, doc: (str, list)) -> str:
+    def _generate_second_digit(self, doc: Union[str, list]) -> str:
         """Gerar o segundo dígito verificador do CNPJ."""
         sum = 0
 
