@@ -31,7 +31,8 @@ cpf = CPF()
 new_cpf = cpf.generate()
 # Validar CPF
 cpf.validate(new_cpf)
-
+# Mascara o documento
+cpf.mask("01234567890")  # "012.345.678-90"
 ```
 
 ### CNPJ
@@ -46,7 +47,8 @@ cnpj = CNPJ()
 new_cnpj = cnpj.generate()
 # Validar CNPJ
 cnpj.validate(new_cnpj)
-
+# Mascara o documento
+cnpj.mask("01234567890123")  # "01.234.567/8901-23"
 ```
 
 ### CNS
@@ -61,5 +63,6 @@ cns = CNS()
 new_cns = cns.generate()
 # Validar CNS
 cns.validate(new_cns)
-
+# Mascara o documento
+cns.mask("012345678901234")  # "012 3456 7890 1234"
 ```

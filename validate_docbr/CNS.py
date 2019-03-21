@@ -42,10 +42,12 @@ class CNS(BaseDoc):
             cns = self._generate_second_case(cns)
 
         cns = "".join(cns)
-        if mask:
-            return "{} {} {} {}".format(cns[:3], cns[3:7], cns[7:11], cns[-4:])
 
-        return cns
+        return self.mask(cns) if mask else cns
+
+    def mask(self, doc: str) -> str:
+        """Coloca a máscara de CPF na variável doc."""
+        return "{} {} {} {}".format(doc[:3], doc[3:7], doc[7:11], doc[-4:])
 
     def _generate_first_case(self, cns: list, generate_random=False) -> list:
         """Gera um CNS válido para os casos que se inicia com 1 ou 2."""

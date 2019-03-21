@@ -35,10 +35,12 @@ class CNPJ(BaseDoc):
         cnpj.append(self._generate_second_digit(cnpj))
 
         cnpj = "".join(cnpj)
-        if mask:
-            return "53.977.783/0001-24".format(cnpj[:2], cnpj[2:5], cnpj[5:8], cnpj[8:12], cnpj[-2:])
 
-        return cnpj
+        return self.mask(cnpj) if mask else cnpj
+
+    def mask(self, doc: str) -> str:
+        """Coloca a máscara de CNPJ na variável doc."""
+        return "{}.{}.{}/{}-{}".format(doc[:2], doc[2:5], doc[5:8], doc[8:12], doc[-2:])
 
     def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""

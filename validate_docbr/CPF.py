@@ -28,10 +28,12 @@ class CPF(BaseDoc):
         cpf.append(self._generate_second_digit(cpf))
 
         cpf = "".join(cpf)
-        if mask:
-            return "{}.{}.{}-{}".format(cpf[:3], cpf[3:6], cpf[6:9], cpf[-2:])
 
-        return cpf
+        return self.mask(cpf) if mask else cpf
+
+    def mask(self, doc: str) -> str:
+        """Coloca a máscara de CPF na variável doc."""
+        return "{}.{}.{}-{}".format(doc[:3], doc[3:6], doc[6:9], doc[-2:])
 
     def _generate_first_digit(self, doc: list) -> str:
         """Gerar o primeiro dígito verificador do CPF."""
