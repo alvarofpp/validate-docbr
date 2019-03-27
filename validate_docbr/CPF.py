@@ -8,7 +8,7 @@ class CPF(BaseDoc):
     def __init__(self):
         self.digits = list(range(10))
 
-    def validate(self, doc: str) -> bool:
+    def validate(self, doc: str = '') -> bool:
         """Validar CPF."""
         doc = list(self._only_digits(doc))
 
@@ -31,7 +31,7 @@ class CPF(BaseDoc):
 
         return self.mask(cpf) if mask else cpf
 
-    def mask(self, doc: str) -> str:
+    def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CPF na variável doc."""
         return "{}.{}.{}-{}".format(doc[:3], doc[3:6], doc[6:9], doc[-2:])
 

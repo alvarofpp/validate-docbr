@@ -9,7 +9,7 @@ class CNS(BaseDoc):
         self.digits = list(range(10))
         self.first_digit = [1, 2, 7, 8, 9]
 
-    def validate(self, doc: str) -> bool:
+    def validate(self, doc: str = '') -> bool:
         """Validar CNS."""
         doc = list(self._only_digits(doc))
 
@@ -45,7 +45,7 @@ class CNS(BaseDoc):
 
         return self.mask(cns) if mask else cns
 
-    def mask(self, doc: str) -> str:
+    def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CPF na variável doc."""
         return "{} {} {} {}".format(doc[:3], doc[3:7], doc[7:11], doc[-4:])
 
