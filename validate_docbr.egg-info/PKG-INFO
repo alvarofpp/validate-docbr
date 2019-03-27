@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: validate-docbr
-Version: 1.1.0
+Version: 1.2.0
 Summary: Validate brazilian documents.
 Home-page: https://github.com/alvarofpp/validate-docbr
 Author: Álvaro Ferreira Pires de Paiva
@@ -21,14 +21,38 @@ Description: # validate-docbr
         ## Documentos
         Documentos que estão no pacote:
         
-        - [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF)
-        - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ)
-        - [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS)
+        - [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF): Cadastro de Pessoas Físicas;
+        - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ): Cadastro Nacional da Pessoa Jurídica;
+        - [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde.
         
-        Para entender melhor os documentos e suas respectivas classes, basta acessar a parte de Wiki do projeto.
+        Para entender melhor os documentos e suas respectivas classes, basta acessar a Wiki do projeto.
         
-        ### CPF
-        Cadastro de Pessoas Físicas.
+        ## Métodos
+        Todos os documentos possuem os mesmos métodos.
+        
+        ### validate
+        Valida o documento passado como argumento. Retorna um `bool`, `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
+        
+        | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+        | --------- | ---- | ----------- | ------------ | --------- |
+        | `doc` | `str`| `''` | X | O documento que se quer validar. |
+        
+        ```python
+        from validate_docbr import CPF
+        
+        cpf = CPF()
+        
+        # Validar CPF
+        cpf.validate("012.345.678-90")  # True
+        cpf.validate("012.345.678-91")  # False
+        ```
+        
+        ### generate
+        Gera um novo documento, retorna em formato de `str`. Recebe os parâmetros:
+        
+        | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+        | --------- | ---- | ----------- | ------------ | --------- |
+        | `mask` | `bool` | `False` | - | Quando possui o valor `True`, o documento retornado estará formatado. |
         
         ```python
         from validate_docbr import CPF
@@ -36,43 +60,45 @@ Description: # validate-docbr
         cpf = CPF()
         
         # Gerar novo CPF
-        new_cpf = cpf.generate()
-        # Validar CPF
-        cpf.validate(new_cpf)
-        # Mascara o documento
-        cpf.mask("01234567890")  # "012.345.678-90"
+        new_cpf_one = cpf.generate()  # "01234567890"
+        new_cpf_two = cpf.generate(True)  # "012.345.678-90"
         ```
         
-        ### CNPJ
-        Cadastro de Pessoas Físicas.
+        ### generate_list
+        Gera uma lista de documentos, retorna em formato de `list` com elementos do tipo `str`. Recebe os parâmetros:
         
+        | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+        | --------- | ---- | ----------- | ------------ | --------- |
+        | `n` | `int` | `1` | X | A quantidade desejada de documentos que serão gerados. |
+        | `mask` | `bool` | `False` | - | Se os documentos gerados deverão ter ou não máscara. |
+        | `repeat` | `bool` | `False` | - | Se aceita ou não documentos repetidos. |
+            
         ```python
-        from validate_docbr import CNPJ
+        from validate_docbr import CPF
         
-        cnpj = CNPJ()
+        cpf = CPF()
         
-        # Gerar novo CNPJ
-        new_cnpj = cnpj.generate()
-        # Validar CNPJ
-        cnpj.validate(new_cnpj)
-        # Mascara o documento
-        cnpj.mask("01234567890123")  # "01.234.567/8901-23"
+        # Gerar lista de CPFs
+        cpfs_one = cpf.generate_list(2)  # [ "85215667438", "28293145811" ]
+        cpfs_two = cpf.generate_list(2, True)  # [ "852.156.674-38", "282.931.458-11" ]
         ```
         
-        ### CNS
-        Cartão Nacional de Saúde.
+        ### mask
+        Mascara o documento passado como argumento. Retorna um `str` que é o documento mascarado . Recebe os parâmetros:
+        
+        | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+        | --------- | ---- | ----------- | ------------ | --------- |
+        | `doc` | `str`| `''` | X | O documento que se quer mascarar. |
         
         ```python
-        from validate_docbr import CNS
+        from validate_docbr import CPF
         
-        cns = CNS()
+        cpf = CPF()
         
-        # Gerar novo CNS
-        new_cns = cns.generate()
-        # Validar CNS
-        cns.validate(new_cns)
-        # Mascara o documento
-        cns.mask("012345678901234")  # "012 3456 7890 1234"
+        cpf_me = "01234567890"
+        
+        # Mascara o CPF
+        cpf.mask("012.345.678-91")  # "012.345.678-90"
         ```
         
 Platform: UNKNOWN
