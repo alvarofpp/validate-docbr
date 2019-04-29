@@ -10,6 +10,8 @@ Para instalar o pacote:
 pip install validate-docbr
 ```
 
+A documentação pode ser acessada [clicando aqui](https://alvarofpp.github.io/validate-docbr).
+
 ## Documentos
 Documentos que estão no pacote:
 

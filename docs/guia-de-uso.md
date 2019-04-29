@@ -1,11 +1,8 @@
-# Guia de uso
+# Métodos
 Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.
 
-## Métodos
-A seguir você verá a descrição e exemplos de como usar os métodos de cada classe.
-
 ------------
-### validate
+## validate
 Valida o documento passado como argumento. Retorna um `bool`, `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
 
 | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
@@ -23,7 +20,7 @@ cpf.validate("012.345.678-91")  # False
 ```
 
 ------------
-### generate
+## generate
 Gera um novo documento, retorna em formato de `str`. Recebe os parâmetros:
 
 | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
@@ -41,7 +38,7 @@ new_cpf_two = cpf.generate(True)  # "012.345.678-90"
 ```
 
 ------------
-### generate_list
+## generate_list
 Gera uma lista de documentos, retorna em formato de `list` com elementos do tipo `str`. Recebe os parâmetros:
 
 | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
@@ -61,7 +58,7 @@ cpfs_two = cpf.generate_list(2, True)  # [ "852.156.674-38", "282.931.458-11" ]
 ```
 
 ------------
-### mask
+## mask
 Mascara o documento passado como argumento. Retorna um `str` que é o documento mascarado . Recebe os parâmetros:
 
 | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
