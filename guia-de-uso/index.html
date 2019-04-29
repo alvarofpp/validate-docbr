@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="MkDocs Team">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Guia de uso - validate-docbr</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Guia de uso";
+    var mkdocs_page_input_path = "guia-de-uso.md";
+    var mkdocs_page_url = "/alvarofpp/validate-docbr/guia-de-uso/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> validate-docbr</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Instalação</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Guia de uso</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#guia-de-uso">Guia de uso</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#metodos">Métodos</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../sobre/">Sobre</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../licenca/">Licença</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">validate-docbr</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Guia de uso</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/alvarofpp/validate-docbr/edit/master/docs/guia-de-uso.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="guia-de-uso">Guia de uso</h1>
+<p>Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.</p>
+<h2 id="metodos">Métodos</h2>
+<p>A seguir você verá a descrição e exemplos de como usar os métodos de cada classe.</p>
+<hr />
+<h3 id="validate">validate</h3>
+<p>Valida o documento passado como argumento. Retorna um <code>bool</code>, <code>True</code> caso seja válido, <code>False</code> caso contrário . Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>doc</code></td>
+<td><code>str</code></td>
+<td><code>''</code></td>
+<td>X</td>
+<td>O documento que se quer validar.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF()
+
+# Validar CPF
+cpf.validate(&quot;012.345.678-90&quot;)  # True
+cpf.validate(&quot;012.345.678-91&quot;)  # False
+</code></pre>
+
+<hr />
+<h3 id="generate">generate</h3>
+<p>Gera um novo documento, retorna em formato de <code>str</code>. Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mask</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>-</td>
+<td>Quando possui o valor <code>True</code>, o documento retornado estará formatado.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF()
+
+# Gerar novo CPF
+new_cpf_one = cpf.generate()  # &quot;01234567890&quot;
+new_cpf_two = cpf.generate(True)  # &quot;012.345.678-90&quot;
+</code></pre>
+
+<hr />
+<h3 id="generate_list">generate_list</h3>
+<p>Gera uma lista de documentos, retorna em formato de <code>list</code> com elementos do tipo <code>str</code>. Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>X</td>
+<td>A quantidade desejada de documentos que serão gerados.</td>
+</tr>
+<tr>
+<td><code>mask</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>-</td>
+<td>Se os documentos gerados deverão ter ou não máscara.</td>
+</tr>
+<tr>
+<td><code>repeat</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>-</td>
+<td>Se aceita ou não documentos repetidos.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF()
+
+# Gerar lista de CPFs
+cpfs_one = cpf.generate_list(2)  # [ &quot;85215667438&quot;, &quot;28293145811&quot; ]
+cpfs_two = cpf.generate_list(2, True)  # [ &quot;852.156.674-38&quot;, &quot;282.931.458-11&quot; ]
+</code></pre>
+
+<hr />
+<h3 id="mask">mask</h3>
+<p>Mascara o documento passado como argumento. Retorna um <code>str</code> que é o documento mascarado . Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>doc</code></td>
+<td><code>str</code></td>
+<td><code>''</code></td>
+<td>X</td>
+<td>O documento que se quer mascarar.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF()
+
+cpf_me = &quot;01234567890&quot;
+
+# Mascara o CPF
+cpf.mask(cpf_me)  # &quot;012.345.678-90&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../sobre/" class="btn btn-neutral float-right" title="Sobre">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Instalação"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/alvarofpp/validate-docbr/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../sobre/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
