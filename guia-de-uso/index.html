@@ -58,11 +58,17 @@
     <a class="current" href="./">Guia de uso</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#guia-de-uso">Guia de uso</a></li>
+    <li class="toctree-l2"><a href="#metodos">Métodos</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#metodos">Métodos</a></li>
+            <li><a class="toctree-l3" href="#validate">validate</a></li>
+        
+            <li><a class="toctree-l3" href="#generate">generate</a></li>
+        
+            <li><a class="toctree-l3" href="#generate_list">generate_list</a></li>
+        
+            <li><a class="toctree-l3" href="#mask">mask</a></li>
         
         </ul>
     
@@ -115,12 +121,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="guia-de-uso">Guia de uso</h1>
+                <h1 id="metodos">Métodos</h1>
 <p>Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.</p>
-<h2 id="metodos">Métodos</h2>
-<p>A seguir você verá a descrição e exemplos de como usar os métodos de cada classe.</p>
 <hr />
-<h3 id="validate">validate</h3>
+<h2 id="validate">validate</h2>
 <p>Valida o documento passado como argumento. Retorna um <code>bool</code>, <code>True</code> caso seja válido, <code>False</code> caso contrário . Recebe os parâmetros:</p>
 <table>
 <thead>
@@ -152,7 +156,7 @@ cpf.validate(&quot;012.345.678-91&quot;)  # False
 </code></pre>
 
 <hr />
-<h3 id="generate">generate</h3>
+<h2 id="generate">generate</h2>
 <p>Gera um novo documento, retorna em formato de <code>str</code>. Recebe os parâmetros:</p>
 <table>
 <thead>
@@ -184,7 +188,7 @@ new_cpf_two = cpf.generate(True)  # &quot;012.345.678-90&quot;
 </code></pre>
 
 <hr />
-<h3 id="generate_list">generate_list</h3>
+<h2 id="generate_list">generate_list</h2>
 <p>Gera uma lista de documentos, retorna em formato de <code>list</code> com elementos do tipo <code>str</code>. Recebe os parâmetros:</p>
 <table>
 <thead>
@@ -230,7 +234,7 @@ cpfs_two = cpf.generate_list(2, True)  # [ &quot;852.156.674-38&quot;, &quot;282
 </code></pre>
 
 <hr />
-<h3 id="mask">mask</h3>
+<h2 id="mask">mask</h2>
 <p>Mascara o documento passado como argumento. Retorna um <code>str</code> que é o documento mascarado . Recebe os parâmetros:</p>
 <table>
 <thead>
