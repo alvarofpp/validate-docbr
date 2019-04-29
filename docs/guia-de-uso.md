@@ -1,27 +1,10 @@
-# validate-docbr
-<a href="https://pypi.org/project/validate-docbr/">
-  <img src="https://img.shields.io/pypi/v/validate-docbr.svg" alt="latest release" />
-</a>
-
-Pacote Python para validação de documentos brasileiros.
-
-Para instalar o pacote:
-```bash
-pip install validate-docbr
-```
-
-## Documentos
-Documentos que estão no pacote:
-
-- [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF): Cadastro de Pessoas Físicas;
-- [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ): Cadastro Nacional da Pessoa Jurídica;
-- [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde.
-
-Para entender melhor os documentos e suas respectivas classes, basta acessar a Wiki do projeto.
+# Guia de uso
+Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.
 
 ## Métodos
-Todos os documentos possuem os mesmos métodos.
+A seguir você verá a descrição e exemplos de como usar os métodos de cada classe.
 
+------------
 ### validate
 Valida o documento passado como argumento. Retorna um `bool`, `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
 
@@ -39,6 +22,7 @@ cpf.validate("012.345.678-90")  # True
 cpf.validate("012.345.678-91")  # False
 ```
 
+------------
 ### generate
 Gera um novo documento, retorna em formato de `str`. Recebe os parâmetros:
 
@@ -56,6 +40,7 @@ new_cpf_one = cpf.generate()  # "01234567890"
 new_cpf_two = cpf.generate(True)  # "012.345.678-90"
 ```
 
+------------
 ### generate_list
 Gera uma lista de documentos, retorna em formato de `list` com elementos do tipo `str`. Recebe os parâmetros:
 
@@ -75,6 +60,7 @@ cpfs_one = cpf.generate_list(2)  # [ "85215667438", "28293145811" ]
 cpfs_two = cpf.generate_list(2, True)  # [ "852.156.674-38", "282.931.458-11" ]
 ```
 
+------------
 ### mask
 Mascara o documento passado como argumento. Retorna um `str` que é o documento mascarado . Recebe os parâmetros:
 

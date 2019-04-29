@@ -1,5 +1,6 @@
 .idea/*
 venv/*
-validate_docbr/__pycache__/*
 dist/*
 build/*
+validate_docbr/__pycache__/*
+site/*

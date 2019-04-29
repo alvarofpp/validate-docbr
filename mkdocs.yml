@@ -1,0 +1,14 @@
+site_name: validate-docbr
+site_url: https://github.com/alvarofpp/validate-docbr
+site_description: Pacote Python para validação de documentos brasileiros.
+site_author: MkDocs Team
+
+nav:
+    - Instalação: index.md
+    - Guia de uso: guia-de-uso.md
+    - Sobre: sobre.md
+    - Licença: licenca.md
+
+repo_url: https://github.com/alvarofpp/validate-docbr
+
+theme: readthedocs

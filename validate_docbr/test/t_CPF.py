@@ -11,3 +11,6 @@ cpfs = cpfs + cpf.generate_list(10000)\
 
 for i in cpfs:
     assert cpf.validate(i)
+
+cpf_me = "01234567890"
+assert cpf.mask(cpf_me) == "012.345.678-90"
