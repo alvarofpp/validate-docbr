@@ -5,7 +5,7 @@
 
 Pacote Python para validação de documentos brasileiros.
 
-## Instalação do MRE
+## Instalação do validate-docbr
 
 Para instalar o pacote:
 

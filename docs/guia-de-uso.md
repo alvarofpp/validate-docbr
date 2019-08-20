@@ -46,7 +46,7 @@ Gera uma lista de documentos, retorna em formato de `list` com elementos do tipo
 | `n` | `int` | `1` | X | A quantidade desejada de documentos que serão gerados. |
 | `mask` | `bool` | `False` | - | Se os documentos gerados deverão ter ou não máscara. |
 | `repeat` | `bool` | `False` | - | Se aceita ou não documentos repetidos. |
-    
+
 ```python
 from validate_docbr import CPF
 
