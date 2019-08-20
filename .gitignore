@@ -4,6 +4,5 @@ dist/*
 build/*
 validate_docbr/__pycache__/*
 site/*
-tests/*
 # Egg metadata
 *.egg-info
