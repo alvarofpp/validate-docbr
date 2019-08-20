@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="validate_docbr",
-    version="1.2.0",
+    version="1.2.1",
     author="Álvaro Ferreira Pires de Paiva",
     author_email="alvarofepipa@gmail.com",
     description="Validate brazilian documents.",
