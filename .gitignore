@@ -2,7 +2,7 @@
 venv/*
 dist/*
 build/*
-validate_docbr/__pycache__/*
+*/__pycache__/*
 site/*
 # Egg metadata
 *.egg-info
