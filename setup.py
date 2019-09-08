@@ -1,11 +1,12 @@
 import setuptools
 
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="validate_docbr",
-    version="1.2.1",
+    version="1.3.0",
     author="Álvaro Ferreira Pires de Paiva",
     author_email="alvarofepipa@gmail.com",
     description="Validate brazilian documents.",
