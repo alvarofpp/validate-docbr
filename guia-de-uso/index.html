@@ -154,6 +154,84 @@ cpf.validate(&quot;012.345.678-90&quot;)  # True
 cpf.validate(&quot;012.345.678-91&quot;)  # False
 </code></pre>
 
+<h3 id="caso-especial-de-cpf">Caso especial de CPF</h3>
+<p>Os CPFs de 000.000.000-00 até 999.999.999-99 são considerados como válidos pois, em alguns casos, existem pessoas vinculadas a eles. Usei a base de dados da <a href="https://brasil.io/dataset/documentos-brasil/documents">Coleção de CNPJs e CPFs brasileiros do Brasil.IO</a> para verificar esses documentos:</p>
+<table>
+<thead>
+<tr>
+<th>CPF</th>
+<th>Pessoa</th>
+<th>Consulta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000.000.000-00</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=00000000000&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>111.111.111-11</td>
+<td>AKA CENTRAL PARK - NEW YORK</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=11111111111&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>222.222.222-22</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=22222222222&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>333.333.333-33</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=33333333333&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>444.444.444-44</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=44444444444&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>555.555.555-55</td>
+<td>ISAEL HERMINIO DA SILVA</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=55555555555&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>666.666.666-66</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=66666666666&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>777.777.777-77</td>
+<td>ANTONIO GONÇALO DA SILVA</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=77777777777&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>888.888.888-88</td>
+<td>-</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=88888888888&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+<tr>
+<td>999.999.999-99</td>
+<td>JOAQUIM ROCHA MATOS</td>
+<td><code>https://brasil.io/dataset/documentos-brasil/documents?search=99999999999&amp;document_type=CPF&amp;document=&amp;name=&amp;sources=</code></td>
+</tr>
+</tbody>
+</table>
+<p>Porém, é comum optar por não validar esses CPFs. Para isso basta usar o parâmetro <code>repeated_digits</code> (por padrão é <code>False</code>) da classe <code>CPF</code> ou mudar a variável de mesmo nome no objeto criado.</p>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF(repeated_digits=True)
+
+# Validar CPF
+cpf.validate(&quot;111.111.111-11&quot;)  # True
+
+# Não aceitando entradas de 000.000.000-00 até 999.999.999-99
+cpf.repeated_digits = False
+
+# Validar CPF
+cpf.validate(&quot;111.111.111-11&quot;)  # False
+</code></pre>
+
 <hr />
 <h2 id="generate">generate</h2>
 <p>Gera um novo documento, retorna em formato de <code>str</code>. Recebe os parâmetros:</p>
