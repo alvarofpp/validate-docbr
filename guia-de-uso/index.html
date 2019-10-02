@@ -63,6 +63,8 @@
         
             <li><a class="toctree-l3" href="#validate">validate</a></li>
         
+            <li><a class="toctree-l3" href="#validate_list">validate_list</a></li>
+        
             <li><a class="toctree-l3" href="#generate">generate</a></li>
         
             <li><a class="toctree-l3" href="#generate_list">generate_list</a></li>
@@ -230,6 +232,37 @@ cpf.repeated_digits = False
 
 # Validar CPF
 cpf.validate(&quot;111.111.111-11&quot;)  # False
+</code></pre>
+
+<hr />
+<h2 id="validate_list">validate_list</h2>
+<p>Valida uma lista de documentos passado como argumento. Retorna uma lista de <code>bool</code>, <code>True</code> caso seja válido, <code>False</code> caso contrário. Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs</code></td>
+<td><code>List[str]</code></td>
+<td><code>[]</code></td>
+<td>X</td>
+<td>A lista de documentos para validar.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">from validate_docbr import CPF
+
+cpf = CPF()
+
+# Validar CPFs
+cpf.validate_list([&quot;012.345.678-90&quot;, &quot;012.345.678-91&quot;])  # [True, False]
 </code></pre>
 
 <hr />
