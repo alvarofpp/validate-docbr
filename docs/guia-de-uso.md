@@ -52,6 +52,24 @@ cpf.validate("111.111.111-11")  # False
 ```
 
 ------------
+## validate_list
+
+Valida uma lista contendo documentos passado como argumento. Retorna uma lista contendo `bool`, `True` caso seja válido, `False` caso contrário. Recebe os parâmetros:
+
+| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+| --------- | ---- | ----------- | ------------ | --------- |
+| `doc` | `List[str]`| `[]` | X | A lista contendo documentos para validar. |
+
+```python
+from validate_docbr import CPF
+
+cpf = CPF()
+
+# Validar CPFs
+cpf.validate_list(["012.345.678-90", "012.345.678-91"])  # [True, False]
+```
+
+------------
 ## generate
 Gera um novo documento, retorna em formato de `str`. Recebe os parâmetros:
 

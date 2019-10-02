@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import List
 
 
 class BaseDoc(ABC):
@@ -7,6 +8,10 @@ class BaseDoc(ABC):
     def validate(self, doc: str = '') -> bool:
         """Método para validar o documento desejado."""
         pass
+    
+    def validate_list(self, docs: List[str]) -> List[bool]:
+        """Método para validar uma lista de documentos desejado."""
+        return [ self.validate(doc) for doc in docs ]
 
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um documento válido."""
