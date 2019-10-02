@@ -8,10 +8,10 @@ class BaseDoc(ABC):
     def validate(self, doc: str = '') -> bool:
         """Método para validar o documento desejado."""
         pass
-    
+
     def validate_list(self, docs: List[str]) -> List[bool]:
         """Método para validar uma lista de documentos desejado."""
-        return [ self.validate(doc) for doc in docs ]
+        return [self.validate(doc) for doc in docs]
 
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um documento válido."""
@@ -32,7 +32,7 @@ class BaseDoc(ABC):
             unique_values = len(doc_set)
 
             if unique_values < n:
-                doc_list = list(doc_set) + self.generate_list((n-unique_values), mask, repeat)
+                doc_list = list(doc_set) + self.generate_list((n - unique_values), mask, repeat)
             else:
                 repeat = True
 

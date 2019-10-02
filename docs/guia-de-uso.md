@@ -54,11 +54,11 @@ cpf.validate("111.111.111-11")  # False
 ------------
 ## validate_list
 
-Valida uma lista contendo documentos passado como argumento. Retorna uma lista contendo `bool`, `True` caso seja válido, `False` caso contrário. Recebe os parâmetros:
+Valida uma lista de documentos passado como argumento. Retorna uma lista de `bool`, `True` caso seja válido, `False` caso contrário. Recebe os parâmetros:
 
 | Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
 | --------- | ---- | ----------- | ------------ | --------- |
-| `doc` | `List[str]`| `[]` | X | A lista contendo documentos para validar. |
+| `docs` | `List[str]`| `[]` | X | A lista de documentos para validar. |
 
 ```python
 from validate_docbr import CPF
