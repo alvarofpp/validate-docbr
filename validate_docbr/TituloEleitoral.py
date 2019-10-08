@@ -12,7 +12,7 @@ class TituloEleitoral(BaseDoc):
         self.first_check_digit_doc_slice = slice(0, 8)
         self.second_check_digit_doc_slice = slice(8, 10)
     
-    def compute_first_check_digit(self, doc_digits: List[int]) -> int:
+    def __compute_first_check_digit(self, doc_digits: List[int]) -> int:
         doc_digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
         terms = [
             doc_digit * multiplier
@@ -26,7 +26,7 @@ class TituloEleitoral(BaseDoc):
 
         return total % 11
 
-    def compute_second_check_digit(self, doc_digits: List[int], first_check_digit: int) -> int:
+    def __compute_second_check_digit(self, doc_digits: List[int], first_check_digit: int) -> int:
         doc_digits_to_consider = doc_digits[self.second_check_digit_doc_slice] + [first_check_digit]
         terms = [
             doc_digit * multiplier
@@ -47,8 +47,8 @@ class TituloEleitoral(BaseDoc):
         if len(doc_digits) != 12:
             return False
 
-        first_check_digit = self.compute_first_check_digit(doc_digits=doc_digits)
-        second_check_digit = self.compute_second_check_digit(doc_digits=doc_digits, first_check_digit=first_check_digit)
+        first_check_digit = self.__compute_first_check_digit(doc_digits=doc_digits)
+        second_check_digit = self.__compute_second_check_digit(doc_digits=doc_digits, first_check_digit=first_check_digit)
 
         return first_check_digit == doc_digits[-2] and second_check_digit == doc_digits[-1] 
 
@@ -63,8 +63,8 @@ class TituloEleitoral(BaseDoc):
         state_identifier = self.__generate_valid_state_identifier()
         document_digits.extend(map(int, state_identifier))
 
-        first_check_digit = self.compute_first_check_digit(doc_digits=document_digits)
-        second_check_digit = self.compute_second_check_digit(doc_digits=document_digits, first_check_digit=first_check_digit)
+        first_check_digit = self.__compute_first_check_digit(doc_digits=document_digits)
+        second_check_digit = self.__compute_second_check_digit(doc_digits=document_digits, first_check_digit=first_check_digit)
 
         document_digits.extend([first_check_digit, second_check_digit])
 
