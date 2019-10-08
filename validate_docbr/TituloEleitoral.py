@@ -13,6 +13,7 @@ class TituloEleitoral(BaseDoc):
         self.second_check_digit_doc_slice = slice(8, 10)
     
     def __compute_first_check_digit(self, doc_digits: List[int]) -> int:
+        """Método que calcula o primeiro dígito verificador."""
         doc_digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
         terms = [
             doc_digit * multiplier
@@ -27,6 +28,7 @@ class TituloEleitoral(BaseDoc):
         return total % 11
 
     def __compute_second_check_digit(self, doc_digits: List[int], first_check_digit: int) -> int:
+        """Método que calcula o segundo dígito verificador."""
         doc_digits_to_consider = doc_digits[self.second_check_digit_doc_slice] + [first_check_digit]
         terms = [
             doc_digit * multiplier
@@ -41,7 +43,7 @@ class TituloEleitoral(BaseDoc):
         return total % 11
 
     def validate(self, doc: str = '') -> bool:
-        """Método para validar o documento desejado."""
+        """Método para validar o título eleitoral."""
         doc_digits = list(map(int, self._only_digits(doc=doc)))
 
         if len(doc_digits) != 12:
@@ -57,7 +59,7 @@ class TituloEleitoral(BaseDoc):
         return state_identifier.zfill(2)
 
     def generate(self, mask: bool = False) -> str:
-        """Método para gerar um documento válido."""
+        """Método para gerar um título eleitoral válido."""
         document_digits = [sample(self.digits, 1)[0] for _ in range(8)]
 
         state_identifier = self.__generate_valid_state_identifier()
