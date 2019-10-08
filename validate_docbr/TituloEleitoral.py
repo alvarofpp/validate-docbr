@@ -5,6 +5,7 @@ from typing import List
 
 
 class TituloEleitoral(BaseDoc):
+    """Classe referente ao Título eleitoral"""
     def __init__(self):
         self.digits = list(range(10))
         self.first_check_digit_weights = list(range(2, 10))
