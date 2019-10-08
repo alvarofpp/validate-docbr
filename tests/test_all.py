@@ -13,7 +13,7 @@ def suite():
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cns))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cnpj))
 
-    return suite
+    return test_suite
 
 
 if __name__ == '__main__':
