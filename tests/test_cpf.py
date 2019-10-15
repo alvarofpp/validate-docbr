@@ -3,32 +3,29 @@ import validate_docbr as docbr
 
 
 class TestCpf(unittest.TestCase):
+    """Testar a classe CPF."""
+
     def setUp(self):
-        """ Inicia novo objeto em todo os testes """
+        """Inicia novo objeto em todo os testes."""
         self.cpf = docbr.CPF()
 
-    def test_generate(self):
-        """ Verifica se o método generate """
-        # generate, generate(mask=True)
-        cpfs = [self.cpf.generate() for i in range(10000)]\
-                + [self.cpf.generate(mask=True) for i in range(10000)]
-        self.assertIsInstance(cpfs, list)
-        self.assertTrue(len(cpfs) == 20000)
-
-    def test_generate_list(self):
-        """ Verifica se o método generate_list """
+    def test_generate_validate(self):
+        """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        cpfs = self.cpf.generate_list(10000)\
-                + self.cpf.generate_list(10000, True)\
-                + self.cpf.generate_list(10000, True, True)
+        cpfs = self.cpf.generate_list(5000)\
+                + self.cpf.generate_list(5000, mask=True)\
+                + self.cpf.generate_list(5000, mask=True, repeat=True)
         self.assertIsInstance(cpfs, list)
-        self.assertTrue(len(cpfs) == 30000)
+        self.assertTrue(len(cpfs) == 15000)
 
-    def test_validate(self):
-        """ Verifica se o método validate """
-        # validate
-        for cpf in self.cpf.generate_list(10000):
-            self.assertTrue(self.cpf.validate(cpf))
+        # validate_list
+        cpfs_validates = self.cpf.validate_list(cpfs)
+        self.assertTrue(sum(cpfs_validates) == 15000)
+
+    def test_mask(self):
+        """Verifica se o método mask funciona corretamente."""
+        masked_cpf = self.cpf.mask('11122233344')
+        self.assertEqual(masked_cpf, '111.222.333-44')
 
     def test_special_case(self):
         """ Verifica os casos especiais de CPF """
