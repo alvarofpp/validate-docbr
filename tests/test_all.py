@@ -3,6 +3,7 @@ import unittest
 import tests.test_cpf
 import tests.test_cns
 import tests.test_cnpj
+import tests.test_titulo_eleitor
 
 
 def suite():
@@ -12,6 +13,7 @@ def suite():
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cpf))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cns))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cnpj))
+    test_suite.addTests(loader.loadTestsFromModule(tests.test_titulo_eleitor))
 
     return test_suite
 
