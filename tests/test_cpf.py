@@ -51,3 +51,7 @@ class TestCpf(unittest.TestCase):
         self.cpf.repeated_digits = True
         for cpf in cpfs_repeated_digits:
             self.assertTrue(self.cpf.validate(cpf))
+
+    def test_mask(self):
+        """Verifica que o método `mask` retorna o valor correto"""
+        self.assertEquals('860.755.390-93', self.cpf.mask('86075539093'))

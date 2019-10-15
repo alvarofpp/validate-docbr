@@ -29,3 +29,7 @@ class TestCnpj(unittest.TestCase):
         # validate
         for cnpj in self.cnpj.generate_list(10000):
             self.assertTrue(self.cnpj.validate(cnpj))
+
+    def test_mask(self):
+        """Verifica que o método `mask` retorna o valor correto"""
+        self.assertEquals('34.557.444/0001-44', self.cnpj.mask('34557444000144'))

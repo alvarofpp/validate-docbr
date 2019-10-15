@@ -29,3 +29,7 @@ class TestCns(unittest.TestCase):
         # validate
         for cns in self.cns.generate_list(10000):
             self.assertTrue(self.cns.validate(cns))
+
+    def test_mask(self):
+        """Verifica que o método `mask` retorna o valor correto"""
+        self.assertEquals('150 3779 6667 0007', self.cns.mask('150377966670007'))
