@@ -1,6 +1,7 @@
 import unittest
 # Classes
 import tests.test_cpf
+import tests.test_cnh
 import tests.test_cns
 import tests.test_cnpj
 
@@ -10,6 +11,7 @@ def suite():
     test_suite = unittest.TestSuite()
 
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cpf))
+    test_suite.addTests(loader.loadTestsFromModule(tests.test_cnh))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cns))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cnpj))
 
