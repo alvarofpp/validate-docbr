@@ -16,8 +16,10 @@ A documentação pode ser acessada [clicando aqui](https://alvarofpp.github.io/v
 Documentos que estão no pacote:
 
 - [CPF](https://github.com/alvarofpp/validate-docbr/wiki/CPF): Cadastro de Pessoas Físicas;
+- [CNH](#): Carteira Nacional de Habilitação;
 - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ): Cadastro Nacional da Pessoa Jurídica;
-- [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde.
+- [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde;
+- [Título eleitoral](#): Cadastro que permite cidadãos brasileiros votar.
 
 Para entender melhor os documentos e suas respectivas classes, basta acessar a Wiki do projeto.
 

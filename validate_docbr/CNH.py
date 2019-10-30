@@ -1,6 +1,6 @@
 from .BaseDoc import BaseDoc
 from random import sample
-from typing import List
+from typing import Union
 
 
 class CNH(BaseDoc):
@@ -35,7 +35,7 @@ class CNH(BaseDoc):
         """Coloca a máscara de CNH na variável doc."""
         return f'{doc[:3]} {doc[3:6]} {doc[6:9]} {doc[9:]}'
 
-    def _generate_first_digit(self, doc: list) -> tuple:
+    def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador da CNH."""
         sum = 0
 
@@ -47,7 +47,7 @@ class CNH(BaseDoc):
             first_value, self.dsc = 0, 2
         return str(first_value)
 
-    def _generate_second_digit(self, doc: list) -> str:
+    def _generate_second_digit(self, doc: Union[str, list]) -> str:
         """Gerar o segundo dígito verificador da CNH."""
         sum = 0
 
@@ -61,7 +61,7 @@ class CNH(BaseDoc):
             second_value = 0
         return str(second_value)
 
-    def _is_repeated_digits(self, doc: List[str]) -> bool:
+    def _is_repeated_digits(self, doc: str) -> bool:
         """Verifica se é uma CNH contém com números repetidos.
         Exemplo: 11111111111"""
         return len(set(doc)) == 1
