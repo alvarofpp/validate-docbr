@@ -21,7 +21,7 @@ Documentos que estão no pacote:
 - [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde;
 - [Título eleitoral](#): Cadastro que permite cidadãos brasileiros votar.
 
-Para entender melhor os documentos e suas respectivas classes, basta acessar a Wiki do projeto.
+Para entender melhor os documentos e suas respectivas classes, basta acessar a [Wiki do projeto](https://github.com/alvarofpp/validate-docbr/wiki).
 
 ## Métodos
 Todos os documentos possuem os mesmos métodos.
