@@ -19,6 +19,7 @@ Documentos que estão no pacote:
 - [CNH](#): Carteira Nacional de Habilitação;
 - [CNPJ](https://github.com/alvarofpp/validate-docbr/wiki/CNPJ): Cadastro Nacional da Pessoa Jurídica;
 - [CNS](https://github.com/alvarofpp/validate-docbr/wiki/CNS): Cartão Nacional de Saúde;
+- [PIS](#): PIS/NIS/PASEP/NIT;
 - [Título eleitoral](#): Cadastro que permite cidadãos brasileiros votar.
 
 Para entender melhor os documentos e suas respectivas classes, basta acessar a Wiki do projeto.
