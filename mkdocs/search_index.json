@@ -67,12 +67,12 @@
         },
         {
             "location": "/sobre/",
-            "text": "Pacote Python para valida\u00e7\u00e3o de documentos brasileiros.\n\n\nDocumentos\n\n\nDocumentos que est\u00e3o no pacote:\n\n\n\n\nCPF: Cadastro de Pessoas F\u00edsicas;\n\n\nCNPJ: Cadastro Nacional da Pessoa Jur\u00eddica;\n\n\nCNS: Cart\u00e3o Nacional de Sa\u00fade.",
+            "text": "Pacote Python para valida\u00e7\u00e3o de documentos brasileiros.\n\n\nDocumentos\n\n\nDocumentos que est\u00e3o no pacote:\n\n\n\n\nCPF: Cadastro de Pessoas F\u00edsicas;\n\n\nCNH: Carteira Nacional de Habilita\u00e7\u00e3o;\n\n\nCNPJ: Cadastro Nacional da Pessoa Jur\u00eddica;\n\n\nCNS: Cart\u00e3o Nacional de Sa\u00fade;\n\n\nPIS: PIS/NIS/PASEP/NIT;\n\n\nT\u00edtulo Eleitoral: Cadastro que permite cidad\u00e3os brasileiros votar.",
             "title": "Sobre"
         },
         {
             "location": "/sobre/#documentos",
-            "text": "Documentos que est\u00e3o no pacote:   CPF: Cadastro de Pessoas F\u00edsicas;  CNPJ: Cadastro Nacional da Pessoa Jur\u00eddica;  CNS: Cart\u00e3o Nacional de Sa\u00fade.",
+            "text": "Documentos que est\u00e3o no pacote:   CPF: Cadastro de Pessoas F\u00edsicas;  CNH: Carteira Nacional de Habilita\u00e7\u00e3o;  CNPJ: Cadastro Nacional da Pessoa Jur\u00eddica;  CNS: Cart\u00e3o Nacional de Sa\u00fade;  PIS: PIS/NIS/PASEP/NIT;  T\u00edtulo Eleitoral: Cadastro que permite cidad\u00e3os brasileiros votar.",
             "title": "Documentos"
         }
     ]
