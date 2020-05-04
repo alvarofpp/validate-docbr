@@ -7,4 +7,5 @@ Documentos que estão no pacote:
 - CNH: Carteira Nacional de Habilitação;
 - CNPJ: Cadastro Nacional da Pessoa Jurídica;
 - CNS: Cartão Nacional de Saúde;
+- PIS: PIS/NIS/PASEP/NIT;
 - Título Eleitoral: Cadastro que permite cidadãos brasileiros votar.
