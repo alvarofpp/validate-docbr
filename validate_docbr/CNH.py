@@ -57,7 +57,9 @@ class CNH(BaseDoc):
         rest = sum % 11
 
         second_value = rest - self.dsc
-        if rest >= 10:
+        if second_value < 0:
+            second_value += 11
+        if second_value >= 10:
             second_value = 0
         return str(second_value)
 
