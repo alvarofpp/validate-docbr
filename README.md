@@ -25,7 +25,7 @@ Documentos que estão no pacote:
 Para entender melhor os documentos e suas respectivas classes, basta acessar a [Wiki do projeto](https://github.com/alvarofpp/validate-docbr/wiki).
 
 ## Métodos
-Todos os documentos possuem os mesmos métodos.
+Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.
 
 ### validate
 Valida o documento passado como argumento. Retorna um `bool`, `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
@@ -61,6 +61,24 @@ cpf = CPF()
 
 # Validar CPFs
 cpf.validate_list(["012.345.678-90", "012.345.678-91"])  # [True, False]
+```
+
+### validate_docs
+**Observação**: diferente dos outros métodos, esse método é do escopo global do pacote, não precisa-se instanciar uma classe para uso.
+
+Valida vários documentos difererentes. Retorna uma lista com valores `bool` para cada tupla da lista (na mesma ordem), `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
+
+| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
+| --------- | ---- | ----------- | ------------ | --------- |
+| `documents` | `List[Tuple[BaseDoc, str]]`| `[]` | X | Lista de tuplas, cada tupla possui como primeiro elemento o tipo de documento e o segundo elemento o valor que se deseja validar. |
+
+```python
+import validate_docbr as docbr
+
+
+# Validar diferentes documentos
+docs = [(docbr.CPF, '90396100457'), (docbr.CNPJ, '49910753848365')]
+docbr.validate_docs(docs)  # [True, False]
 ```
 
 ### generate
