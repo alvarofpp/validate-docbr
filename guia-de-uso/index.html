@@ -266,6 +266,38 @@ cpf.validate_list([&quot;012.345.678-90&quot;, &quot;012.345.678-91&quot;])  # [
 </code></pre>
 
 <hr />
+<h3 id="validate_docs">validate_docs</h3>
+<p><strong>Observação</strong>: diferente dos outros métodos, esse método é do escopo global do pacote, não precisa-se instanciar uma classe para uso.</p>
+<p>Valida vários documentos difererentes. Retorna uma lista com valores <code>bool</code> para cada tupla da lista (na mesma ordem), <code>True</code> caso seja válido, <code>False</code> caso contrário . Recebe os parâmetros:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Valor padrão</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>documents</code></td>
+<td><code>List[Tuple[BaseDoc, str]]</code></td>
+<td><code>[]</code></td>
+<td>X</td>
+<td>Lista de tuplas, cada tupla possui como primeiro elemento o tipo de documento e o segundo elemento o valor que se deseja validar.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="python">import validate_docbr as docbr
+
+
+# Validar diferentes documentos
+docs = [(docbr.CPF, '90396100457'), (docbr.CNPJ, '49910753848365')]
+docbr.validate_docs(docs)  # [True, False]
+</code></pre>
+
+<hr />
 <h2 id="generate">generate</h2>
 <p>Gera um novo documento, retorna em formato de <code>str</code>. Recebe os parâmetros:</p>
 <table>
