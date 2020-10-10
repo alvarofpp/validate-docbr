@@ -70,7 +70,7 @@ cpf.validate_list(["012.345.678-90", "012.345.678-91"])  # [True, False]
 ```
 
 ------------
-### validate_docs
+## validate_docs
 **Observação**: diferente dos outros métodos, esse método é do escopo global do pacote, não precisa-se instanciar uma classe para uso.
 
 Valida vários documentos difererentes. Retorna uma lista com valores `bool` para cada tupla da lista (na mesma ordem), `True` caso seja válido, `False` caso contrário . Recebe os parâmetros:
