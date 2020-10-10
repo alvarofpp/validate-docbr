@@ -6,6 +6,7 @@ import tests.test_cns
 import tests.test_cnpj
 import tests.test_pis
 import tests.test_titulo_eleitor
+import tests.test_generic
 
 
 def suite():
@@ -18,6 +19,7 @@ def suite():
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cnpj))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_pis))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_titulo_eleitor))
+    test_suite.addTests(loader.loadTestsFromModule(tests.test_generic))
 
     return test_suite
 
