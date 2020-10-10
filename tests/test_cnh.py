@@ -37,6 +37,8 @@ class TestCnh(unittest.TestCase):
             ('0123 456 789 10', False),
             ('65821310502', True),
             ('658 213 105 02', True),
+            ('10764125809', True),
+            ('77625261946', True)
         ]
         for cnh, is_valid in cases:
             self.assertEqual(self.cnh.validate(cnh), is_valid)

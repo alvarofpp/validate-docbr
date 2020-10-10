@@ -8,7 +8,6 @@ class CNH(BaseDoc):
 
     def __init__(self):
         self.digits = list(range(10))
-        self.dsc = 0
 
     def validate(self, doc: str = '') -> bool:
         """Validar CNH."""
@@ -37,6 +36,7 @@ class CNH(BaseDoc):
 
     def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador da CNH."""
+        self.dsc = 0
         sum = 0
 
         for i in range(9, 0, -1):
@@ -57,7 +57,9 @@ class CNH(BaseDoc):
         rest = sum % 11
 
         second_value = rest - self.dsc
-        if rest >= 10:
+        if second_value < 0:
+            second_value += 11
+        if second_value >= 10:
             second_value = 0
         return str(second_value)
 
