@@ -12,6 +12,9 @@ class CPF(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Validar CPF."""
+        if not self._validate_input(doc, ['.', '-']):
+            return False
+
         doc = list(self._only_digits(doc))
 
         if len(doc) != 11:
@@ -20,7 +23,7 @@ class CPF(BaseDoc):
         if not self.repeated_digits and self._check_repeated_digits(doc):
             return False
 
-        return self._generate_first_digit(doc) == doc[9]\
+        return self._generate_first_digit(doc) == doc[9] \
                and self._generate_second_digit(doc) == doc[10]
 
     def generate(self, mask: bool = False) -> str:
@@ -59,7 +62,7 @@ class CPF(BaseDoc):
         sum = 0
 
         for i in range(11, 1, -1):
-            sum += int(doc[11-i]) * i
+            sum += int(doc[11 - i]) * i
 
         sum = (sum * 10) % 11
 

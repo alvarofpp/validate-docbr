@@ -13,6 +13,9 @@ class CNPJ(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Validar CNPJ."""
+        if not self._validate_input(doc, ['.', '/', '-']):
+            return False
+
         doc = self._only_digits(doc)
 
         if len(doc) != 14:
