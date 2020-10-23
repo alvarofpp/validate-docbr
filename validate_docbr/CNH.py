@@ -11,6 +11,9 @@ class CNH(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Validar CNH."""
+        if not self._validate_input(doc, [' ']):
+            return False
+
         doc = self._only_digits(doc)
 
         if len(doc) != 11 or self._is_repeated_digits(doc):

@@ -15,6 +15,9 @@ class TituloEleitoral(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Método para validar o título eleitoral."""
+        if not self._validate_input(doc, [' ']):
+            return False
+
         doc_digits = list(map(int, self._only_digits(doc=doc)))
 
         if len(doc_digits) != 12:

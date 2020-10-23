@@ -11,6 +11,9 @@ class PIS(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Validar PIS/NIS/PASEP/NIT."""
+        if not self._validate_input(doc, ['.', '-']):
+            return False
+
         doc = self._only_digits(doc)
 
         if len(doc) != 11 or self._is_repeated_digits(doc):

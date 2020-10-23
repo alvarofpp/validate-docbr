@@ -45,3 +45,15 @@ class BaseDoc(ABC):
     def _only_digits(self, doc: str = '') -> str:
         """Remove os outros caracteres que não sejam dígitos."""
         return "".join([x for x in doc if x.isdigit()])
+
+    def _validate_input(self, input: str, valid_characters: List = None) -> bool:
+        """Validar input.
+        Caso ele possua apenas dígitos e caracteres válidos, retorna True.
+        Caso possua algum caractere que não seja dígito ou caractere válido, retorna False."""
+        if valid_characters is None:
+            valid_characters = ['.', '-', '/', ' ']
+
+        set_non_digit_characters = set([x for x in input if not x.isdigit()])
+        set_valid_characters = set(valid_characters)
+
+        return not (len(set_non_digit_characters.difference(set_valid_characters)) > 0)

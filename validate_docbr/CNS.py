@@ -11,6 +11,9 @@ class CNS(BaseDoc):
 
     def validate(self, doc: str = '') -> bool:
         """Validar CNS."""
+        if not self._validate_input(doc, [' ']):
+            return False
+
         doc = list(self._only_digits(doc))
 
         if len(doc) != 15 or int(doc[0]) not in self.first_digit:
