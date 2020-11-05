@@ -7,6 +7,12 @@ class TituloEleitoral(BaseDoc):
     """Classe referente ao Título eleitoral"""
 
     def __init__(self):
+        """
+        Initialize a list of integers.
+
+        Args:
+            self: (todo): write your description
+        """
         self.digits = list(range(10))
         self.first_check_digit_weights = list(range(2, 10))
         self.second_check_digit_weights = list(range(7, 10))
@@ -82,5 +88,11 @@ class TituloEleitoral(BaseDoc):
         return total % 11
 
     def _generate_valid_state_identifier(self) -> str:
+        """
+        Generate a valid state identifier.
+
+        Args:
+            self: (todo): write your description
+        """
         state_identifier = str(sample(range(1, 19), 1)[0])
         return state_identifier.zfill(2)

@@ -10,6 +10,11 @@ import tests.test_generic
 
 
 def suite():
+    """
+    Load test suite of - test test suite.
+
+    Args:
+    """
     loader = unittest.TestLoader()
     test_suite = unittest.TestSuite()
 

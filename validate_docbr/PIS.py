@@ -7,6 +7,12 @@ class PIS(BaseDoc):
     """Classe referente ao PIS/NIS/PASEP/NIT."""
 
     def __init__(self):
+        """
+        Initialize the range
+
+        Args:
+            self: (todo): write your description
+        """
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:

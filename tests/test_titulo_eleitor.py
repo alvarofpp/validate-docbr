@@ -31,6 +31,12 @@ class TestTituloEleitoral(unittest.TestCase):
             self.assertTrue(self.titulo_eleitoral.validate(titulo))
 
     def test_mask_returns_correctly_formatted_string(self):
+        """
+        Test for masked mask.
+
+        Args:
+            self: (todo): write your description
+        """
         masked_titulo = self.titulo_eleitoral.mask('123123123123')
 
         self.assertEquals(masked_titulo, '1231 2312 3123')

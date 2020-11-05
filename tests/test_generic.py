@@ -5,6 +5,12 @@ import validate_docbr as docbr
 
 
 def get_random_number_str(length):
+    """
+    Generate a random string.
+
+    Args:
+        length: (int): write your description
+    """
     numbers = '0123456789'
     return ''.join(random.choice(numbers) for i in range(length))
 

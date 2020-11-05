@@ -6,6 +6,12 @@ class CNS(BaseDoc):
     """Classe referente ao Cartão Nacional de Saúde (CNS)."""
 
     def __init__(self):
+        """
+        Initialize a list.
+
+        Args:
+            self: (todo): write your description
+        """
         self.digits = list(range(10))
         self.first_digit = [1, 2, 7, 8, 9]
 

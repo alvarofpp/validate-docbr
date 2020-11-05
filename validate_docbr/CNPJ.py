@@ -7,6 +7,12 @@ class CNPJ(BaseDoc):
     """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ)."""
 
     def __init__(self):
+        """
+        Initialize weights.
+
+        Args:
+            self: (todo): write your description
+        """
         self.digits = list(range(10))
         self.weights_first = list(range(5, 1, -1)) + list(range(9, 1, -1))
         self.weights_second = list(range(6, 1, -1)) + list(range(9, 1, -1))

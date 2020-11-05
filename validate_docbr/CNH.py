@@ -7,6 +7,12 @@ class CNH(BaseDoc):
     """Classe referente ao Carteira Nacional de Habilitação (CNH)."""
 
     def __init__(self):
+        """
+        Initialize the range
+
+        Args:
+            self: (todo): write your description
+        """
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:
