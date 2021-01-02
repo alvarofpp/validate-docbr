@@ -49,4 +49,6 @@ class Certidao(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Mascara para a Certidão de Nascimento/Casamento/Óbito."""
-        pass
+        return "{}.{}.{}.{}.{}.{}.{}.{}-{}".format(
+            doc[:6], doc[6:8], doc[8:10], doc[10:14],
+            doc[14], doc[15:20], doc[20:23], doc[23:29], doc[-2:])
