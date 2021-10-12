@@ -1,5 +1,6 @@
 import unittest
 # Classes
+import tests.test_certidao
 import tests.test_cpf
 import tests.test_cnh
 import tests.test_cns
@@ -13,6 +14,7 @@ def suite():
     loader = unittest.TestLoader()
     test_suite = unittest.TestSuite()
 
+    test_suite.addTests(loader.loadTestsFromModule(tests.test_certidao))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cpf))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cnh))
     test_suite.addTests(loader.loadTestsFromModule(tests.test_cns))
