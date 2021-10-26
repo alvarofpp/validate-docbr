@@ -33,4 +33,4 @@ class TestTituloEleitoral(unittest.TestCase):
     def test_mask_returns_correctly_formatted_string(self):
         masked_titulo = self.titulo_eleitoral.mask('123123123123')
 
-        self.assertEquals(masked_titulo, '1231 2312 3123')
+        self.assertEqual(masked_titulo, '1231 2312 3123')
