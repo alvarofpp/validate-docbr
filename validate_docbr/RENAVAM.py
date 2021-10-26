@@ -33,7 +33,7 @@ class RENAVAM(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de Renavam na variável doc."""
-        return f"{doc[:10]}-{doc[10]}"
+        return "{}-{}".format(doc[:10], doc[10])
 
     def _generate_last_digit(self, doc: Union[str, list]) -> str:
         """Gerar o dígito verificador do Renavam."""
