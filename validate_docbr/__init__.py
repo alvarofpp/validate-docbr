@@ -6,4 +6,5 @@ from .CNS import CNS
 from .PIS import PIS
 from .TituloEleitoral import TituloEleitoral
 from .Certidao import Certidao
+from .RENAVAM import RENAVAM
 from .generic import validate_docs
