@@ -12,9 +12,9 @@ class TestCpf(unittest.TestCase):
     def test_generate_validate(self):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        cpfs = self.cpf.generate_list(5000)\
-                + self.cpf.generate_list(5000, mask=True)\
-                + self.cpf.generate_list(5000, mask=True, repeat=True)
+        cpfs = self.cpf.generate_list(5000) \
+               + self.cpf.generate_list(5000, mask=True) \
+               + self.cpf.generate_list(5000, mask=True, repeat=True)
         self.assertIsInstance(cpfs, list)
         self.assertTrue(len(cpfs) == 15000)
 

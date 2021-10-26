@@ -13,9 +13,9 @@ class TestCnh(unittest.TestCase):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
         cnhs = (
-            self.cnh.generate_list(1)
-            + self.cnh.generate_list(1, mask=True)
-            + self.cnh.generate_list(1, mask=True, repeat=True)
+                self.cnh.generate_list(1)
+                + self.cnh.generate_list(1, mask=True)
+                + self.cnh.generate_list(1, mask=True, repeat=True)
         )
         self.assertIsInstance(cnhs, list)
         self.assertTrue(len(cnhs) == 3)

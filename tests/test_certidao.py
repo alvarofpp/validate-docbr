@@ -12,8 +12,8 @@ class TestCertidao(unittest.TestCase):
     def test_generate_validate(self):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        certidoes = self.certidao.generate_list(5000)\
-            + self.certidao.generate_list(5000, mask=True)
+        certidoes = self.certidao.generate_list(5000) \
+                    + self.certidao.generate_list(5000, mask=True)
         self.assertIsInstance(certidoes, list)
         self.assertTrue(len(certidoes) == 10000)
 
