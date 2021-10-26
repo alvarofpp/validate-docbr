@@ -13,9 +13,9 @@ class TestRenavam(unittest.TestCase):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
         renavams = (
-            self.renavam.generate_list(1)
-            + self.renavam.generate_list(1, mask=True)
-            + self.renavam.generate_list(1, mask=True, repeat=True)
+                self.renavam.generate_list(1)
+                + self.renavam.generate_list(1, mask=True)
+                + self.renavam.generate_list(1, mask=True, repeat=True)
         )
         self.assertIsInstance(renavams, list)
         self.assertTrue(len(renavams) == 3)
