@@ -33,6 +33,7 @@ class TestCnh(unittest.TestCase):
         """ Verifica os casos especiais de CNH """
         cases = [
             ('00000000000', False),
+            ('AAAAAAAAAAA', False),
             ('78623161668', False),
             ('0123 456 789 10', False),
             ('65821310502', True),

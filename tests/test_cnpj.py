@@ -26,3 +26,13 @@ class TestCnpj(unittest.TestCase):
         """Verifica se o método mask funciona corretamente."""
         masked_cnpj = self.cnpj.mask('11222333444455')
         self.assertEqual(masked_cnpj, '11.222.333/4444-55')
+
+    def test_special_case(self):
+        """ Verifica os casos especiais de CNPJ """
+        cases = [
+            ('00000-000/0000', False),
+            ('AAAA0AAAAAAA2AAAAAA', False),
+            ('74600269000145', True),
+        ]
+        for cnpj, is_valid in cases:
+            self.assertEqual(self.cnpj.validate(cnpj), is_valid)

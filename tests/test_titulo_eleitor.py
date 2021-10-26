@@ -34,3 +34,13 @@ class TestTituloEleitoral(unittest.TestCase):
         masked_titulo = self.titulo_eleitoral.mask('123123123123')
 
         self.assertEqual(masked_titulo, '1231 2312 3123')
+
+    def test_special_case(self):
+        """ Verifica os casos especiais de Titulo de Eleitor """
+        cases = [
+            ('3467875434578764345789654', False),
+            ('AAAAAAAAAAA', False),
+            ('', False),
+        ]
+        for titulo_eleitoral, is_valid in cases:
+            self.assertEqual(self.titulo_eleitoral.validate(titulo_eleitoral), is_valid)

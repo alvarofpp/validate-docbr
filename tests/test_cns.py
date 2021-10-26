@@ -26,3 +26,12 @@ class TestCns(unittest.TestCase):
         """Verifica se o método mask funciona corretamente."""
         masked_cns = self.cns.mask('111222233334444')
         self.assertEqual(masked_cns, '111 2222 3333 4444')
+
+    def test_special_case(self):
+        """ Verifica os casos especiais de CNS """
+        cases = [
+            ('AAAAAAAAAAA', False),
+            ('', False),
+        ]
+        for cns, is_valid in cases:
+            self.assertEqual(self.cns.validate(cns), is_valid)

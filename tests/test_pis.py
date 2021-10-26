@@ -32,3 +32,13 @@ class TestPis(unittest.TestCase):
 
         masked_pis = self.pis.mask('03953333770')
         self.assertEqual(masked_pis, '039.53333.77-0')
+
+    def test_special_case(self):
+        """ Verifica os casos especiais de PIS """
+        cases = [
+            ('3467875434578764345789654', False),
+            ('AAAAAAAAAAA', False),
+            ('', False),
+        ]
+        for pis, is_valid in cases:
+            self.assertEqual(self.pis.validate(pis), is_valid)
