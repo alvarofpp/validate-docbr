@@ -12,9 +12,9 @@ class TestPis(unittest.TestCase):
     def test_generate_validate(self):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        piss = self.pis.generate_list(5000)\
-                + self.pis.generate_list(5000, mask=True)\
-                + self.pis.generate_list(5000, mask=True, repeat=True)
+        piss = self.pis.generate_list(5000) \
+               + self.pis.generate_list(5000, mask=True) \
+               + self.pis.generate_list(5000, mask=True, repeat=True)
         self.assertIsInstance(piss, list)
         self.assertTrue(len(piss) == 15000)
 
@@ -29,6 +29,6 @@ class TestPis(unittest.TestCase):
 
         masked_pis = self.pis.mask('93999998770')
         self.assertEqual(masked_pis, '939.99998.77-0')
-        
+
         masked_pis = self.pis.mask('03953333770')
         self.assertEqual(masked_pis, '039.53333.77-0')

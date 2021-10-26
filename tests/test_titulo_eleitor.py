@@ -10,17 +10,17 @@ class TestTituloEleitoral(unittest.TestCase):
     def test_generate(self):
         """ Verifica se o método generate """
         # generate, generate(mask=True)
-        titulos = [self.titulo_eleitoral.generate() for i in range(10000)]\
-                + [self.titulo_eleitoral.generate(mask=True) for i in range(10000)]
+        titulos = [self.titulo_eleitoral.generate() for i in range(10000)] \
+                  + [self.titulo_eleitoral.generate(mask=True) for i in range(10000)]
         self.assertIsInstance(titulos, list)
         self.assertTrue(len(titulos) == 20000)
 
     def test_generate_list(self):
         """ Verifica se o método generate_list """
         # generate_list
-        titulo_eleitoral = self.titulo_eleitoral.generate_list(10000)\
-                + self.titulo_eleitoral.generate_list(10000, True)\
-                + self.titulo_eleitoral.generate_list(10000, True, True)
+        titulo_eleitoral = self.titulo_eleitoral.generate_list(10000) \
+                           + self.titulo_eleitoral.generate_list(10000, True) \
+                           + self.titulo_eleitoral.generate_list(10000, True, True)
         self.assertIsInstance(titulo_eleitoral, list)
         self.assertTrue(len(titulo_eleitoral) == 30000)
 

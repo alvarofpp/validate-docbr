@@ -12,8 +12,8 @@ class TestCnpj(unittest.TestCase):
     def test_generate_validate(self):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        cnpjs = self.cnpj.generate_list(5000)\
-                + self.cnpj.generate_list(5000, mask=True)\
+        cnpjs = self.cnpj.generate_list(5000) \
+                + self.cnpj.generate_list(5000, mask=True) \
                 + self.cnpj.generate_list(5000, mask=True, repeat=True)
         self.assertIsInstance(cnpjs, list)
         self.assertTrue(len(cnpjs) == 15000)

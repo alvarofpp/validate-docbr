@@ -12,9 +12,9 @@ class TestCns(unittest.TestCase):
     def test_generate_validate(self):
         """Verifica os métodos de geração e validação de documento."""
         # generate_list
-        cnss = self.cns.generate_list(5000)\
-                + self.cns.generate_list(5000, mask=True)\
-                + self.cns.generate_list(5000, mask=True, repeat=True)
+        cnss = self.cns.generate_list(5000) \
+               + self.cns.generate_list(5000, mask=True) \
+               + self.cns.generate_list(5000, mask=True, repeat=True)
         self.assertIsInstance(cnss, list)
         self.assertTrue(len(cnss) == 15000)
 
