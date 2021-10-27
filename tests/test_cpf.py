@@ -48,3 +48,10 @@ class TestCpf(unittest.TestCase):
         self.cpf.repeated_digits = True
         for cpf in cpfs_repeated_digits:
             self.assertTrue(self.cpf.validate(cpf))
+
+        cases = [
+            ('AAA.AAA.AAA+AA', False),
+            ('04255791000144', False),
+        ]
+        for cpf, is_valid in cases:
+            self.assertEqual(self.cpf.validate(cpf), is_valid)

@@ -28,3 +28,15 @@ class TestCertidao(unittest.TestCase):
             '10453901552013100012021000012321')
         self.assertEqual(
             masked_certidao, '104539.01.55.2013.1.00012.021.0000123-21')
+
+    def test_special_case(self):
+        """ Verifica os casos especiais de Certidão """
+        cases = [
+            ('3467875434578764345789654', False),
+            ('AAAAAAAAAAA', False),
+            ('', False),
+            ('27610201552018226521370659786633', True),
+            ('27610201552018226521370659786630', False),
+        ]
+        for certidao, is_valid in cases:
+            self.assertEqual(self.certidao.validate(certidao), is_valid)
