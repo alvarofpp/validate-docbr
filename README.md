@@ -12,6 +12,13 @@ pip install validate-docbr
 
 A documentação pode ser acessada [clicando aqui](https://alvarofpp.github.io/validate-docbr).
 
+## Testes
+Para realizar os testes basta executar o seguinte comando:
+
+```shell
+coverage run -m unittest discover tests && coverage report -m
+```
+
 ## Documentos
 Documentos que estão no pacote:
 
@@ -96,7 +103,7 @@ cpf = CPF()
 
 # Gerar novo CPF
 new_cpf_one = cpf.generate()  # "01234567890"
-new_cpf_two = cpf.generate(True)  # "012.345.678-90"
+new_cpf_two = cpf.generate(mask=True)  # "012.345.678-90"
 ```
 
 ### generate_list
@@ -115,7 +122,7 @@ cpf = CPF()
 
 # Gerar lista de CPFs
 cpfs_one = cpf.generate_list(2)  # [ "85215667438", "28293145811" ]
-cpfs_two = cpf.generate_list(2, True)  # [ "852.156.674-38", "282.931.458-11" ]
+cpfs_two = cpf.generate_list(2, mask=True)  # [ "852.156.674-38", "282.931.458-11" ]
 ```
 
 ### mask
