@@ -1,3 +1,4 @@
+from validate_docbr.utils import digitsAreRepeated
 from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
@@ -16,7 +17,7 @@ class CNH(BaseDoc):
 
         doc = self._only_digits(doc)
 
-        if len(doc) != 11 or self._is_repeated_digits(doc):
+        if len(doc) != 11 or digitsAreRepeated(''.join(doc)):
             return False
 
         first_digit = self._generate_first_digit(doc)
@@ -65,8 +66,3 @@ class CNH(BaseDoc):
         if second_value >= 10:
             second_value = 0
         return str(second_value)
-
-    def _is_repeated_digits(self, doc: str) -> bool:
-        """Verifica se é uma CNH contém com números repetidos.
-        Exemplo: 11111111111"""
-        return len(set(doc)) == 1

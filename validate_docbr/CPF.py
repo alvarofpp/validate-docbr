@@ -1,4 +1,6 @@
 from typing import List
+
+from validate_docbr.utils import digitsAreRepeated
 from .BaseDoc import BaseDoc
 from random import sample
 
@@ -20,7 +22,7 @@ class CPF(BaseDoc):
         if len(doc) != 11:
             return False
 
-        if not self.repeated_digits and self._check_repeated_digits(doc):
+        if not self.repeated_digits and digitsAreRepeated(''.join(doc)):
             return False
 
         return self._generate_first_digit(doc) == doc[9] \
@@ -70,8 +72,3 @@ class CPF(BaseDoc):
             sum = 0
 
         return str(sum)
-
-    def _check_repeated_digits(self, doc: List[str]) -> bool:
-        """Verifica se é um CPF com números repetidos.
-        Exemplo: 111.111.111-11"""
-        return len(set(doc)) == 1

@@ -1,3 +1,4 @@
+from validate_docbr.utils import digitsAreRepeated
 from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
@@ -16,7 +17,7 @@ class PIS(BaseDoc):
 
         doc = self._only_digits(doc)
 
-        if len(doc) != 11 or self._is_repeated_digits(doc):
+        if len(doc) != 11 or digitsAreRepeated(''.join(doc)):
             return False
 
         digit = self._generate_digit(doc)
@@ -50,8 +51,3 @@ class PIS(BaseDoc):
             digit = 11 - module
 
         return str(digit)
-
-    def _is_repeated_digits(self, doc: str) -> bool:
-        """Verifica se o PIS/NIS/PASEP/NIT contém com números repetidos.
-        Exemplo: 11111111111"""
-        return len(set(doc)) == 1
