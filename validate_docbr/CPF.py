@@ -17,8 +17,12 @@ class CPF(BaseDoc):
 
         doc = list(self._only_digits(doc))
 
-        if len(doc) != 11:
+        if len(doc) > 11:
             return False
+        
+        # Essa inserção considera a possibilidade de por algum caso não ser pego o dígito 0 inicial de algum CPF
+        while len(doc) < 11:
+            doc.insert(0, 0)
 
         if not self.repeated_digits and self._check_repeated_digits(doc):
             return False
@@ -40,6 +44,11 @@ class CPF(BaseDoc):
         return self.mask(cpf) if mask else cpf
 
     def mask(self, doc: str = '') -> str:
+        
+        # Essa inserção considera a possibilidade de por algum caso não ser pego o dígito 0 inicial de algum CPF
+        while len(doc) < 11:
+            doc = '0' + doc
+        
         """Coloca a máscara de CPF na variável doc."""
         return "{}.{}.{}-{}".format(doc[:3], doc[3:6], doc[6:9], doc[-2:])
 
