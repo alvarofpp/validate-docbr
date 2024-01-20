@@ -16,7 +16,7 @@ pycparser==2.20
 Pygments==2.10.0
 pyparsing==3.0.2
 readme-renderer==30.0
-requests==2.26.0
+requests==2.31.0
 requests-toolbelt==0.9.1
 rfc3986==1.5.0
 SecretStorage==3.3.1
