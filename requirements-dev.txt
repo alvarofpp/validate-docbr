@@ -13,7 +13,7 @@ keyring==23.2.1
 packaging==21.0
 pkginfo==1.7.1
 pycparser==2.20
-Pygments==2.10.0
+Pygments==2.15.0
 pyparsing==3.0.2
 readme-renderer==30.0
 requests==2.26.0
