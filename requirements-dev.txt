@@ -4,7 +4,7 @@ cffi==1.15.0
 charset-normalizer==2.0.7
 colorama==0.4.4
 coverage==6.0.2
-cryptography==39.0.1
+cryptography==42.0.2
 docutils==0.18
 idna==3.3
 importlib-metadata==4.8.1
