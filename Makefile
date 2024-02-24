@@ -43,7 +43,7 @@ test:
 test-coverage:
 	@docker compose run --rm -v ${ROOT}:/app \
 		--name ${TEST_CONTAINER_NAME} ${APP_NAME} \
-		/bin/bash -c "coverage run -m unittest discover tests && coverage report -m"
+		/bin/bash -c "pytest --cov=validate_docbr/"
 
 .PHONY: shell
 shell:
