@@ -1,6 +1,7 @@
-from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
+
+from .BaseDoc import BaseDoc
 
 
 class PIS(BaseDoc):
@@ -33,7 +34,7 @@ class PIS(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de PIS/NIS/PASEP/NIT na variável doc."""
-        return "{}.{}.{}-{}".format(doc[:3], doc[3:8], doc[8:10], doc[10:])
+        return f"{doc[:3]}.{doc[3:8]}.{doc[8:10]}-{doc[10:]}"
 
     def _generate_digit(self, doc: Union[str, list]) -> str:
         """Gerar o dígito verificador do PIS/NIS/PASEP/NIT."""

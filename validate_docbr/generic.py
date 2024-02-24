@@ -1,5 +1,6 @@
 import inspect
 from typing import List, Tuple, Type
+
 from .BaseDoc import BaseDoc
 
 

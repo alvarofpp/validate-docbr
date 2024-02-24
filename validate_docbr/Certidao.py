@@ -1,5 +1,6 @@
-from .BaseDoc import BaseDoc
 from random import sample
+
+from .BaseDoc import BaseDoc
 
 
 class Certidao(BaseDoc):

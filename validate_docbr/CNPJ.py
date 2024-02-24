@@ -1,6 +1,7 @@
-from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
+
+from .BaseDoc import BaseDoc
 
 
 class CNPJ(BaseDoc):
@@ -21,11 +22,7 @@ class CNPJ(BaseDoc):
         if len(doc) != 14:
             return False
 
-        for i in range(10):
-            if doc.count("{}".format(i)) == 14:
-                return False
-
-        return self._generate_first_digit(doc) == doc[12]\
+        return self._generate_first_digit(doc) == doc[12] \
                and self._generate_second_digit(doc) == doc[13]
 
     def generate(self, mask: bool = False) -> str:
@@ -43,7 +40,7 @@ class CNPJ(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CNPJ na variável doc."""
-        return "{}.{}.{}/{}-{}".format(doc[:2], doc[2:5], doc[5:8], doc[8:12], doc[-2:])
+        return f"{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[-2:]}"
 
     def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""
@@ -53,11 +50,7 @@ class CNPJ(BaseDoc):
             sum += int(doc[i]) * self.weights_first[i]
 
         sum = sum % 11
-
-        if sum < 2:
-            sum = 0
-        else:
-            sum = 11 - sum
+        sum = 0 if sum < 2 else 11 - sum
 
         return str(sum)
 
@@ -69,10 +62,6 @@ class CNPJ(BaseDoc):
             sum += int(doc[i]) * self.weights_second[i]
 
         sum = sum % 11
-
-        if sum < 2:
-            sum = 0
-        else:
-            sum = 11 - sum
+        sum = 0 if sum < 2 else 11 - sum
 
         return str(sum)
