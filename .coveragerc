@@ -1,0 +1,8 @@
+[run]
+source = validate_docbr
+disable_warnings = no-data-collected
+
+[report]
+fail_under = 97.50
+precision = 2
+show_missing = True

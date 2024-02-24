@@ -1,5 +1,5 @@
-import unittest
 import random
+import unittest
 
 import validate_docbr as docbr
 
@@ -34,7 +34,7 @@ class TestValidateDocs(unittest.TestCase):
 
             # Documentos aleatórios
             len_doc = len(DocClass().generate())
-            for i in range(200):
+            for _ in range(200):
                 random_doc = get_random_number_str(len_doc)
                 documents += [(DocClass, random_doc)]
                 right_answers += [DocClass().validate(random_doc)]
