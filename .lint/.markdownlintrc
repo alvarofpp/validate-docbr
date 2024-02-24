@@ -1,0 +1,11 @@
+{
+  "default": true,
+  "heading-style": { "style": "atx" },
+  "ul-style": { "style": "dash" },
+  "line-length": { "line_length": 100 },
+  "no-duplicate-heading": { "allow_different_nesting": true },
+  "no-trailing-punctuation": { "punctuation": ".,;:!" },
+  "no-blanks-blockquote": false,
+  "no-inline-html": { "allowed_elements": ["p", "a", "img"] },
+  "hr-style": { "style": "---" }
+}
