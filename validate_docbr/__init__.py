@@ -1,10 +1,23 @@
 from .BaseDoc import BaseDoc
-from .CPF import CPF
-from .CNPJ import CNPJ
-from .CNH import CNH
-from .CNS import CNS
-from .PIS import PIS
-from .TituloEleitoral import TituloEleitoral
 from .Certidao import Certidao
-from .RENAVAM import RENAVAM
+from .CNH import CNH
+from .CNPJ import CNPJ
+from .CNS import CNS
+from .CPF import CPF
 from .generic import validate_docs
+from .PIS import PIS
+from .RENAVAM import RENAVAM
+from .TituloEleitoral import TituloEleitoral
+
+__all__ = [
+    'BaseDoc',
+    'CPF',
+    'CNPJ',
+    'CNH',
+    'CNS',
+    'PIS',
+    'TituloEleitoral',
+    'Certidao',
+    'RENAVAM',
+    'validate_docs',
+]

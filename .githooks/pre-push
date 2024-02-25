@@ -1,0 +1,23 @@
+#!/bin/sh
+
+warning() {
+  # shellcheck disable=2028
+  echo "\\e[1;33m$1"
+}
+
+alertMessages() {
+  warning "One or more $1 are failing."
+  warning "Please fix those $1 before pushing your branch"
+}
+
+if make lint; then
+  if make test-coverage; then
+    exit 0
+  else
+    alertMessages "unit tests"
+    exit 1
+  fi
+else
+  alertMessages "linter checks"
+  exit 1
+fi

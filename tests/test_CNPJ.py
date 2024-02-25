@@ -1,4 +1,5 @@
 import unittest
+
 import validate_docbr as docbr
 
 
@@ -28,7 +29,7 @@ class TestCnpj(unittest.TestCase):
         self.assertEqual(masked_cnpj, '11.222.333/4444-55')
 
     def test_special_case(self):
-        """ Verifica os casos especiais de CNPJ """
+        """Verifica os casos especiais de CNPJ."""
         cases = [
             ('00000-000/0000', False),
             ('AAAA0AAAAAAA2AAAAAA', False),
@@ -36,3 +37,36 @@ class TestCnpj(unittest.TestCase):
         ]
         for cnpj, is_valid in cases:
             self.assertEqual(self.cnpj.validate(cnpj), is_valid)
+
+    def test_validate_success(self):
+        """Testar o método validate do CNPJ."""
+        # GIVEN
+        doc = '74600269000145'
+
+        # WHEN
+        validate_return = self.cnpj.validate(doc)
+
+        # THEN
+        self.assertTrue(validate_return)
+
+    def test_validate_wrong_input(self):
+        """Testar o método validate do CNPJ em caso de input errado."""
+        # GIVEN
+        doc = '74600269000145_'
+
+        # WHEN
+        validate_return = self.cnpj.validate(doc)
+
+        # THEN
+        self.assertFalse(validate_return)
+
+    def test_validate_wrong_length(self):
+        """Testar o método validate do CNPJ em caso de tamanho inválido."""
+        # GIVEN
+        doc = '746002690001450'
+
+        # WHEN
+        validate_return = self.cnpj.validate(doc)
+
+        # THEN
+        self.assertFalse(validate_return)

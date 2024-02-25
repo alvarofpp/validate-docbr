@@ -1,6 +1,7 @@
-from typing import List
-from .BaseDoc import BaseDoc
 from random import sample
+from typing import List
+
+from .BaseDoc import BaseDoc
 
 
 class CPF(BaseDoc):
@@ -41,7 +42,7 @@ class CPF(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CPF na variável doc."""
-        return "{}.{}.{}-{}".format(doc[:3], doc[3:6], doc[6:9], doc[-2:])
+        return f"{doc[:3]}.{doc[3:6]}.{doc[6:9]}-{doc[-2:]}"
 
     def _generate_first_digit(self, doc: list) -> str:
         """Gerar o primeiro dígito verificador do CPF."""

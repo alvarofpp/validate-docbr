@@ -1,6 +1,7 @@
-from .BaseDoc import BaseDoc
 from random import sample
 from typing import List
+
+from .BaseDoc import BaseDoc
 
 
 class TituloEleitoral(BaseDoc):
@@ -24,9 +25,13 @@ class TituloEleitoral(BaseDoc):
             return False
 
         first_check_digit = self._compute_first_check_digit(doc_digits=doc_digits)
-        second_check_digit = self._compute_second_check_digit(doc_digits=doc_digits, first_check_digit=first_check_digit)
+        second_check_digit = self._compute_second_check_digit(
+            doc_digits=doc_digits,
+            first_check_digit=first_check_digit
+        )
 
-        return first_check_digit == doc_digits[-2] and second_check_digit == doc_digits[-1]
+        return first_check_digit == doc_digits[-2] \
+            and second_check_digit == doc_digits[-1]
 
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um título eleitoral válido."""
@@ -36,8 +41,10 @@ class TituloEleitoral(BaseDoc):
         document_digits.extend(map(int, state_identifier))
 
         first_check_digit = self._compute_first_check_digit(doc_digits=document_digits)
-        second_check_digit = self._compute_second_check_digit(doc_digits=document_digits,
-                                                               first_check_digit=first_check_digit)
+        second_check_digit = self._compute_second_check_digit(
+            doc_digits=document_digits,
+            first_check_digit=first_check_digit
+        )
         document_digits.extend([first_check_digit, second_check_digit])
 
         document = ''.join(map(str, document_digits))
@@ -49,14 +56,17 @@ class TituloEleitoral(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Mascara o documento enviado"""
-        return '{} {} {}'.format(doc[0:4], doc[4:8], doc[8:])
+        return f'{doc[0:4]} {doc[4:8]} {doc[8:]}'
 
     def _compute_first_check_digit(self, doc_digits: List[int]) -> int:
         """Método que calcula o primeiro dígito verificador."""
         doc_digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
         terms = [
             doc_digit * multiplier
-            for doc_digit, multiplier in zip(doc_digits_to_consider, self.first_check_digit_weights)
+            for doc_digit, multiplier in zip(
+                doc_digits_to_consider,
+                self.first_check_digit_weights
+            )
         ]
 
         total = sum(terms)
@@ -66,12 +76,20 @@ class TituloEleitoral(BaseDoc):
 
         return total % 11
 
-    def _compute_second_check_digit(self, doc_digits: List[int], first_check_digit: int) -> int:
+    def _compute_second_check_digit(
+            self,
+            doc_digits: List[int],
+            first_check_digit: int
+    ) -> int:
         """Método que calcula o segundo dígito verificador."""
-        doc_digits_to_consider = doc_digits[self.second_check_digit_doc_slice] + [first_check_digit]
+        doc_digits_to_consider = doc_digits[self.second_check_digit_doc_slice] \
+                                + [first_check_digit]
         terms = [
             doc_digit * multiplier
-            for doc_digit, multiplier in zip(doc_digits_to_consider, self.second_check_digit_weights)
+            for doc_digit, multiplier in zip(
+                doc_digits_to_consider,
+                self.second_check_digit_weights
+            )
         ]
 
         total = sum(terms)

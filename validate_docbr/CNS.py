@@ -1,5 +1,6 @@
-from .BaseDoc import BaseDoc
 from random import sample
+
+from .BaseDoc import BaseDoc
 
 
 class CNS(BaseDoc):
@@ -44,13 +45,13 @@ class CNS(BaseDoc):
         else:
             cns = self._generate_second_case(cns)
 
-        cns = "".join(cns)
+        cns = ''.join(cns)
 
         return self.mask(cns) if mask else cns
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CPF na variável doc."""
-        return "{} {} {} {}".format(doc[:3], doc[3:7], doc[7:11], doc[-4:])
+        return f"{doc[:3]} {doc[3:7]} {doc[7:11]} {doc[-4:]}"
 
     def _generate_first_case(self, cns: list, generate_random=False) -> list:
         """Gera um CNS válido para os casos que se inicia com 1 ou 2."""
@@ -95,7 +96,8 @@ class CNS(BaseDoc):
         return self._change_cns(cns, 15 - diff, diff)
 
     def _change_cns(self, cns: list, i: int, val: int) -> list:
-        """Altera o CNS recursivamente para que atenda as especificações de validade dele."""
+        """Altera o CNS recursivamente para que atenda as especificações de
+        validade dele."""
         if val == 0:
             if self._check_cns_valid(cns):
                 return cns
@@ -108,7 +110,7 @@ class CNS(BaseDoc):
             i += 1
             return self._change_cns(cns, i, val)
 
-        if not cns[i] == '9':
+        if cns[i] != '9':
             cns[i] = str(int(cns[i]) + 1)
             val -= (15 - i)
         else:

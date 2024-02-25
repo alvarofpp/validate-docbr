@@ -1,6 +1,7 @@
-from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
+
+from .BaseDoc import BaseDoc
 
 
 class RENAVAM(BaseDoc):
@@ -33,7 +34,7 @@ class RENAVAM(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de Renavam na variável doc."""
-        return "{}-{}".format(doc[:10], doc[10])
+        return f"{doc[:10]}-{doc[10]}"
 
     def _generate_last_digit(self, doc: Union[str, list]) -> str:
         """Gerar o dígito verificador do Renavam."""

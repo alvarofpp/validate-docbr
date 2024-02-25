@@ -1,6 +1,7 @@
-from .BaseDoc import BaseDoc
 from random import sample
 from typing import Union
+
+from .BaseDoc import BaseDoc
 
 
 class CNH(BaseDoc):
@@ -35,7 +36,7 @@ class CNH(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CNH na variável doc."""
-        return "{} {} {} {}".format(doc[:3], doc[3:6], doc[6:9], doc[9:])
+        return f"{doc[:3]} {doc[3:6]} {doc[6:9]} {doc[9:]}"
 
     def _generate_first_digit(self, doc: Union[str, list]) -> str:
         """Gerar o primeiro dígito verificador da CNH."""
