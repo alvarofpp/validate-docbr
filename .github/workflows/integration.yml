@@ -1,0 +1,38 @@
+---
+name: Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  DOCKER_IMAGE: alvarofpp/app:${{ github.sha }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: alvarofpp/linter:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - run: lint-commit origin/main
+      - run: lint-markdown
+      - run: lint-dockerfile
+      - run: lint-yaml
+      - run: lint-shell-script
+      - run: lint-python
+  tests:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: docker build -t $DOCKER_IMAGE .
+      - run: |
+          docker run --rm -v $(pwd):/app $DOCKER_IMAGE /bin/bash -c \
+          "pytest --cov=validate_docbr/"
