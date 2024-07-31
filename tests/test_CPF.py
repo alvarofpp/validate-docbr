@@ -67,6 +67,6 @@ class TestCpf(unittest.TestCase):
         for cpf_input, expected_output in cases:
             self.assertEqual(self.cpf._complete_with_zeros(cpf_input), expected_output)
         
-        # Test if the input is already correct length, it should not add zeros
+        # Testa se a entrada ja tem o tamanho correto, não deve adicionar zeros
         self.assertEqual(self.cpf._complete_with_zeros('00123456789'), '00123456789')
         self.assertEqual(self.cpf._complete_with_zeros('23456789012'), '23456789012')

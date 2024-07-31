@@ -20,8 +20,6 @@ class CPF(BaseDoc):
 
         if len(doc) != 11:
             doc = self._complete_with_zeros(doc)
-            if len(doc) != 11:
-                return False
 
         if not self.repeated_digits and self._check_repeated_digits(doc):
             return False
@@ -81,5 +79,4 @@ class CPF(BaseDoc):
 
     def _complete_with_zeros(self, doc: list[str]) -> list[str]:
         """Adiciona zeros a esquerda para completar o CPF."""
-
         return '0' * (11 - len(doc)) + str(doc)
