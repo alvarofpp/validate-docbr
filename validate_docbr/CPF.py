@@ -18,14 +18,14 @@ class CPF(BaseDoc):
 
         doc = list(self._only_digits(doc))
 
-        if len(doc) != 11:
-            return False
+        if len(doc) < 11:
+            doc = self._complete_with_zeros(doc)
 
         if not self.repeated_digits and self._check_repeated_digits(doc):
             return False
 
         return self._generate_first_digit(doc) == doc[9] \
-               and self._generate_second_digit(doc) == doc[10]
+            and self._generate_second_digit(doc) == doc[10]
 
     def generate(self, mask: bool = False) -> str:
         """Gerar CPF."""
@@ -76,3 +76,8 @@ class CPF(BaseDoc):
         """Verifica se é um CPF com números repetidos.
         Exemplo: 111.111.111-11"""
         return len(set(doc)) == 1
+
+    def _complete_with_zeros(self, doc: str) -> list[str]:
+        """Adiciona zeros à esquerda para completar o CPF."""
+        zeros_needed = 11 - len(doc)
+        return ['0'] * zeros_needed + doc
