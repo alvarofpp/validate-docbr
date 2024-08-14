@@ -60,13 +60,10 @@ class TestCpf(unittest.TestCase):
     def test_add_leading_zeros(self):
         """Verifica se o método de adicionar zeros à esquerda funciona corretamente."""
         cases = [
-            ('123456789', '00123456789'),  # 9 digits
-            ('12345678901', '12345678901'),  # 11 digits
-            ('1234567', '00001234567'),  # 7 digits
+            ('123456789', False),  # 9 digitos
+            ('12345678901', False),  # 11 digitos
+            ('1234567', False),  # 7 digitos
+            ('9380826044', True) # cpf valido
         ]
-        for cpf_input, expected_output in cases:
-            self.assertEqual(self.cpf._complete_with_zeros(cpf_input), expected_output)
-        
-        # Testa se a entrada ja tem o tamanho correto, não deve adicionar zeros
-        self.assertEqual(self.cpf._complete_with_zeros('00123456789'), '00123456789')
-        self.assertEqual(self.cpf._complete_with_zeros('23456789012'), '23456789012')
+        for cpf_input, is_valid in cases:
+            self.assertEqual(self.cpf.validate(cpf_input), is_valid)

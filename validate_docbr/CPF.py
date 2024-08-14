@@ -18,7 +18,7 @@ class CPF(BaseDoc):
 
         doc = list(self._only_digits(doc))
 
-        if len(doc) != 11:
+        if len(doc) < 11:
             doc = self._complete_with_zeros(doc)
 
         if not self.repeated_digits and self._check_repeated_digits(doc):
@@ -77,6 +77,7 @@ class CPF(BaseDoc):
         Exemplo: 111.111.111-11"""
         return len(set(doc)) == 1
 
-    def _complete_with_zeros(self, doc: list[str]) -> list[str]:
-        """Adiciona zeros a esquerda para completar o CPF."""
-        return '0' * (11 - len(doc)) + str(doc)
+    def _complete_with_zeros(self, doc: str) -> list[str]:
+        """Adiciona zeros à esquerda para completar o CPF."""
+        zeros_needed = 11 - len(doc)
+        return ['0'] * zeros_needed + doc
