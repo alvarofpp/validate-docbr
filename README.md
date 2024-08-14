@@ -1,10 +1,12 @@
-> :warning: Estamos planejando a versão `2.0.0` do pacote. **Para saber as mudanças que estão por vir, leia a [issue #67](https://github.com/alvarofpp/validate-docbr/issues/67)**. Você também pode sugerir atualizações para o pacote na mesma issue, participe! :warning:
-
 # validate-docbr
 
 <a href="https://pypi.org/project/validate-docbr/">
   <img src="https://img.shields.io/pypi/v/validate-docbr.svg" alt="latest release" />
 </a>
+
+> :warning: Estamos planejando a versão `2.0.0` do pacote. **Para saber as mudanças que estão por
+> vir, leia a [issue #67](https://github.com/alvarofpp/validate-docbr/issues/67)**.
+> Você também pode sugerir atualizações para o pacote na mesma issue, participe! :warning:
 
 Pacote Python para validação de documentos brasileiros.
 
