@@ -1,5 +1,4 @@
 from random import sample
-from typing import Union
 
 from .DocumentBase import DocumentBase
 
@@ -38,7 +37,7 @@ class CNH(DocumentBase):
         """Coloca a máscara de CNH na variável doc."""
         return f"{doc[:3]} {doc[3:6]} {doc[6:9]} {doc[9:]}"
 
-    def _generate_first_digit(self, doc: Union[str, list]) -> str:
+    def _generate_first_digit(self, doc: str | list[str]) -> str:
         """Gerar o primeiro dígito verificador da CNH."""
         self.dsc = 0
         sum = 0
@@ -51,7 +50,7 @@ class CNH(DocumentBase):
             first_value, self.dsc = 0, 2
         return str(first_value)
 
-    def _generate_second_digit(self, doc: Union[str, list]) -> str:
+    def _generate_second_digit(self, doc: str | list[str]) -> str:
         """Gerar o segundo dígito verificador da CNH."""
         sum = 0
 

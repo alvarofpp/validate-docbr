@@ -1,5 +1,4 @@
 from random import sample
-from typing import List
 
 from .DocumentBase import DocumentBase
 
@@ -58,7 +57,7 @@ class TituloEleitoral(DocumentBase):
         """Mascara o documento enviado"""
         return f'{doc[0:4]} {doc[4:8]} {doc[8:]}'
 
-    def _compute_first_check_digit(self, doc_digits: List[int]) -> int:
+    def _compute_first_check_digit(self, doc_digits: list[int]) -> int:
         """Método que calcula o primeiro dígito verificador."""
         doc_digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
         terms = [
@@ -78,7 +77,7 @@ class TituloEleitoral(DocumentBase):
 
     def _compute_second_check_digit(
             self,
-            doc_digits: List[int],
+            doc_digits: list[int],
             first_check_digit: int
     ) -> int:
         """Método que calcula o segundo dígito verificador."""

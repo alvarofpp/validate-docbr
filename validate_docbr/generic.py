@@ -1,10 +1,9 @@
 import inspect
-from typing import List, Tuple, Type
 
 from .DocumentBase import DocumentBase
 
 
-def validate_docs(documents: List[Tuple[Type[DocumentBase], str]] = list):
+def validate_docs(documents: list[tuple[type[DocumentBase], str]] = list()):
     """Recebe uma lista de tuplas (classe, valor) e a valida"""
     validations = []
 

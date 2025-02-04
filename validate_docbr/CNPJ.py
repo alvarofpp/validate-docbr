@@ -1,6 +1,5 @@
 import string
 from random import sample
-from typing import Union
 
 from .DocumentBase import DocumentBase
 
@@ -48,7 +47,7 @@ class CNPJ(DocumentBase):
         """Coloca a máscara de CNPJ na variável doc."""
         return f"{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[-2:]}"
 
-    def _generate_first_digit(self, doc: Union[str, list]) -> str:
+    def _generate_first_digit(self, doc: str | list[str]) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""
         sum = 0
 
@@ -60,7 +59,7 @@ class CNPJ(DocumentBase):
 
         return str(sum)
 
-    def _generate_second_digit(self, doc: Union[str, list]) -> str:
+    def _generate_second_digit(self, doc: str | list[str]) -> str:
         """Gerar o segundo dígito verificador do CNPJ."""
         sum = 0
 

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List
 
 from validate_docbr.exceptions import FunctionNotImplementedError
 
@@ -22,7 +21,7 @@ class DocumentBase(ABC):
         """Mascara o documento enviado"""
         raise FunctionNotImplementedError("mask")
 
-    def validate_list(self, docs: List[str]) -> List[bool]:
+    def validate_list(self, docs: list[str]) -> list[bool]:
         """Método para validar uma lista de documentos desejado."""
         return [self.validate(doc) for doc in docs]
 

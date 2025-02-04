@@ -1,5 +1,4 @@
 from random import sample
-from typing import List
 
 from .DocumentBase import DocumentBase
 
@@ -72,7 +71,7 @@ class CPF(DocumentBase):
 
         return str(sum)
 
-    def _check_repeated_digits(self, doc: List[str]) -> bool:
+    def _check_repeated_digits(self, doc: list[str]) -> bool:
         """Verifica se é um CPF com números repetidos.
         Exemplo: 111.111.111-11"""
         return len(set(doc)) == 1
