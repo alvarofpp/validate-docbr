@@ -1,10 +1,10 @@
 from random import sample
 from typing import Union
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class CNH(BaseDoc):
+class CNH(DocumentBase):
     """Classe referente ao Carteira Nacional de Habilitação (CNH)."""
 
     def __init__(self):

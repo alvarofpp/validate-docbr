@@ -1,10 +1,10 @@
 from random import sample
 from typing import List
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class CPF(BaseDoc):
+class CPF(DocumentBase):
     """Classe referente ao Cadastro de Pessoas Físicas (CPF)."""
 
     def __init__(self, repeated_digits: bool = False):

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 
-class BaseDoc(ABC):
+class DocumentBase(ABC):
     """Classe base para todas as classes referentes a documentos."""
 
     @abstractmethod

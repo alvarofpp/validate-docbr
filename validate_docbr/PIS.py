@@ -1,10 +1,10 @@
 from random import sample
 from typing import Union
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class PIS(BaseDoc):
+class PIS(DocumentBase):
     """Classe referente ao PIS/NIS/PASEP/NIT."""
 
     def __init__(self):

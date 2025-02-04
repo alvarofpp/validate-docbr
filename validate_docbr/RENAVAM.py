@@ -1,10 +1,10 @@
 from random import sample
 from typing import Union
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class RENAVAM(BaseDoc):
+class RENAVAM(DocumentBase):
     """Classe referente ao Registro Nacional de Veículos Automotores (RENAVAM)."""
 
     def __init__(self):

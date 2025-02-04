@@ -2,10 +2,10 @@ import string
 from random import sample
 from typing import Union
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class CNPJ(BaseDoc):
+class CNPJ(DocumentBase):
     """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ)."""
 
     def __init__(self):

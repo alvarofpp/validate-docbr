@@ -1,9 +1,9 @@
 from random import sample
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class Certidao(BaseDoc):
+class Certidao(DocumentBase):
     """Classe referente a Certidão de Nascimento/Casamento/Óbito."""
 
     def __init__(self):

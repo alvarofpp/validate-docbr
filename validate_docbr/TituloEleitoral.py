@@ -1,10 +1,10 @@
 from random import sample
 from typing import List
 
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 
 
-class TituloEleitoral(BaseDoc):
+class TituloEleitoral(DocumentBase):
     """Classe referente ao Título eleitoral"""
 
     def __init__(self):

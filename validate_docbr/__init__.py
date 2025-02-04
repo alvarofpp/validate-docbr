@@ -1,4 +1,4 @@
-from .BaseDoc import BaseDoc
+from .DocumentBase import DocumentBase
 from .Certidao import Certidao
 from .CNH import CNH
 from .CNPJ import CNPJ
@@ -10,7 +10,7 @@ from .RENAVAM import RENAVAM
 from .TituloEleitoral import TituloEleitoral
 
 __all__ = [
-    'BaseDoc',
+    'DocumentBase',
     'CPF',
     'CNPJ',
     'CNH',
