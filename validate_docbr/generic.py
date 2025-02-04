@@ -1,6 +1,6 @@
 import inspect
 
-from .DocumentBase import DocumentBase
+from validate_docbr.DocumentBase import DocumentBase
 
 
 def validate_docs(documents: list[tuple[type[DocumentBase], str]] = list()):

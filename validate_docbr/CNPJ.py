@@ -1,7 +1,7 @@
 import string
 from random import sample
 
-from .DocumentBase import DocumentBase
+from validate_docbr.DocumentBase import DocumentBase
 
 
 class CNPJ(DocumentBase):
