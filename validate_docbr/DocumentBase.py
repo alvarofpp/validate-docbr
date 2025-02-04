@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
+from validate_docbr.exceptions import FunctionNotImplementedError
+
 
 class DocumentBase(ABC):
     """Classe base para todas as classes referentes a documentos."""
@@ -8,16 +10,21 @@ class DocumentBase(ABC):
     @abstractmethod
     def validate(self, doc: str = "") -> bool:
         """Método para validar o documento desejado."""
-        pass
-
-    def validate_list(self, docs: List[str]) -> List[bool]:
-        """Método para validar uma lista de documentos desejado."""
-        return [self.validate(doc) for doc in docs]
+        raise FunctionNotImplementedError("validate")
 
     @abstractmethod
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um documento válido."""
-        pass
+        raise FunctionNotImplementedError("generate")
+
+    @abstractmethod
+    def mask(self, doc: str = '') -> str:
+        """Mascara o documento enviado"""
+        raise FunctionNotImplementedError("mask")
+
+    def validate_list(self, docs: List[str]) -> List[bool]:
+        """Método para validar uma lista de documentos desejado."""
+        return [self.validate(doc) for doc in docs]
 
     def generate_list(
         self, n: int = 1, mask: bool = False, repeat: bool = False
