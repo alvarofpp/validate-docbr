@@ -18,7 +18,11 @@ class TestRenavam(unittest.TestCase):
         renavams = (
                 self.renavam.generate_list(number_of_documents)
                 + self.renavam.generate_list(number_of_documents, mask=True)
-                + self.renavam.generate_list(number_of_documents, mask=True, repeat=True)
+                + self.renavam.generate_list(
+                    number_of_documents,
+                    mask=True,
+                    repeat=True
+                )
         )
         validated_renavams = self.renavam.validate_list(renavams)
 

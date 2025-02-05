@@ -3,7 +3,7 @@ import inspect
 from validate_docbr.DocumentBase import DocumentBase
 
 
-def validate_docs(documents: list[tuple[type[DocumentBase], str]] = list()):
+def validate_docs(documents: list[tuple[type[DocumentBase], str]] = list):
     """Recebe uma lista de tuplas (classe, valor) e a valida"""
     validations = []
 

@@ -33,6 +33,11 @@ lint:
 		&& lint-shell-script \
 		&& lint-python"
 
+.PHONY: lint-fix
+lint-fix:
+	@docker pull ${DOCKER_IMAGE_LINTER}
+	@docker run --rm -v ${ROOT}:/app ${DOCKER_IMAGE_LINTER} "lint-python-fix"
+
 .PHONY: test
 test:
 	@docker compose run --rm -v ${ROOT}:/app \
