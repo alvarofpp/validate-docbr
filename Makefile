@@ -46,7 +46,7 @@ test:
 
 .PHONY: test-coverage
 test-coverage:
-	@docker compose run --rm -v ${ROOT}:/app \
+	@docker compose run --rm -T -v ${ROOT}:/app \
 		--name ${TEST_CONTAINER_NAME} ${APP_NAME} \
 		/bin/bash -c "pytest --cov=validate_docbr/"
 
