@@ -4,34 +4,39 @@ import validate_docbr as docbr
 
 
 class TestCertidao(unittest.TestCase):
-    """Testar a classe Certidao."""
+    """Testa a classe Certidao."""
 
     def setUp(self):
-        """Inicia novo objeto em todo os testes."""
         self.certidao = docbr.Certidao()
 
-    def test_generate_validate(self):
-        """Verifica os métodos de geração e validação de documento."""
-        # generate_list
-        certidoes = self.certidao.generate_list(5000) \
-                    + self.certidao.generate_list(5000, mask=True)
-        self.assertIsInstance(certidoes, list)
-        self.assertTrue(len(certidoes) == 10000)
+    def test_generate_list_with_validate_list(self):
+        # Given
+        number_of_documents = 5000
+        number_of_documents_expected = number_of_documents * 2
 
-        # validate_list
-        certidoes_validates = self.certidao.validate_list(certidoes)
-        self.assertTrue(sum(certidoes_validates) == 10000)
+        # When
+        certidoes = self.certidao.generate_list(number_of_documents) \
+                    + self.certidao.generate_list(number_of_documents, mask=True)
+        validated_certidoes = self.certidao.validate_list(certidoes)
+
+        # Then
+        self.assertIsInstance(certidoes, list)
+        self.assertTrue(len(certidoes) == number_of_documents_expected)
+        self.assertTrue(sum(validated_certidoes) == number_of_documents_expected)
 
     def test_mask(self):
-        """Verifica se o método mask funciona corretamente."""
+        # Given
+        doc = '10453901552013100012021000012321'
+        doc_expected = '104539.01.55.2013.1.00012.021.0000123-21'
 
-        masked_certidao = self.certidao.mask(
-            '10453901552013100012021000012321')
-        self.assertEqual(
-            masked_certidao, '104539.01.55.2013.1.00012.021.0000123-21')
+        # When
+        masked_certidao = self.certidao.mask(doc)
+
+        # Then
+        self.assertEqual(masked_certidao, doc_expected)
 
     def test_special_case(self):
-        """ Verifica os casos especiais de Certidão """
+        # Given
         cases = [
             ('3467875434578764345789654', False),
             ('AAAAAAAAAAA', False),
@@ -39,5 +44,10 @@ class TestCertidao(unittest.TestCase):
             ('27610201552018226521370659786633', True),
             ('27610201552018226521370659786630', False),
         ]
+
+        # When
         for certidao, is_valid in cases:
-            self.assertEqual(self.certidao.validate(certidao), is_valid)
+            doc_validated = self.certidao.validate(certidao)
+
+            # Then
+            self.assertEqual(doc_validated, is_valid)
