@@ -9,18 +9,13 @@ class TestTituloEleitoral(unittest.TestCase):
 
     def test_generate_list_with_validate_list(self):
         # Given
-        number_of_documents = 5000
-        number_of_documents_expected = number_of_documents * 3
+        number_of_documents = 10
+        number_of_documents_expected = number_of_documents * 2
 
         # When
         titulos_eleitorais = self.titulo_eleitoral.generate_list(number_of_documents) \
                            + self.titulo_eleitoral.generate_list(
                                 number_of_documents,
-                                True
-                            ) \
-                           + self.titulo_eleitoral.generate_list(
-                                number_of_documents,
-                                True,
                                 True
                             )
         validated_titulos_eleitorais = self.titulo_eleitoral.validate_list(

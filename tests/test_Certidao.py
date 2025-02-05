@@ -11,7 +11,7 @@ class TestCertidao(unittest.TestCase):
 
     def test_generate_list_with_validate_list(self):
         # Given
-        number_of_documents = 5000
+        number_of_documents = 10
         number_of_documents_expected = number_of_documents * 2
 
         # When

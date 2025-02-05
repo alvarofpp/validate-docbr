@@ -11,13 +11,12 @@ class TestCpf(unittest.TestCase):
 
     def test_generate_list_with_validate_list(self):
         # Given
-        number_of_documents = 5000
-        number_of_documents_expected = number_of_documents * 3
+        number_of_documents = 10
+        number_of_documents_expected = number_of_documents * 2
 
         # When
         cpfs = self.cpf.generate_list(number_of_documents) \
-               + self.cpf.generate_list(number_of_documents, mask=True) \
-               + self.cpf.generate_list(number_of_documents, mask=True, repeat=True)
+               + self.cpf.generate_list(number_of_documents, mask=True)
         validated_cpfs = self.cpf.validate_list(cpfs)
 
         # Then

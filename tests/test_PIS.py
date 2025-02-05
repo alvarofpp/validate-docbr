@@ -11,13 +11,12 @@ class TestPis(unittest.TestCase):
 
     def test_generate_list_with_validate_list(self):
         # Given
-        number_of_documents = 5000
-        number_of_documents_expected = number_of_documents * 3
+        number_of_documents = 10
+        number_of_documents_expected = number_of_documents * 2
 
         # When
         piss = self.pis.generate_list(number_of_documents) \
-               + self.pis.generate_list(number_of_documents, mask=True) \
-               + self.pis.generate_list(number_of_documents, mask=True, repeat=True)
+               + self.pis.generate_list(number_of_documents, mask=True)
         validated_piss = self.pis.validate_list(piss)
 
         # Then

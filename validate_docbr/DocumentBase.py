@@ -26,15 +26,18 @@ class DocumentBase(ABC):
         return [self.validate(doc) for doc in docs]
 
     def generate_list(
-        self, n: int = 1, mask: bool = False, repeat: bool = False
+        self,
+        number_of_documents: int = 1,
+        mask: bool = False,
+        repeat: bool = False
     ) -> list:
         """Gerar uma lista do mesmo documento."""
         doc_list = []
 
-        if n <= 0:
+        if number_of_documents <= 0:
             return doc_list
 
-        for _ in range(n):
+        for _ in range(number_of_documents):
             doc_list.append(self.generate(mask))
 
         while not repeat:
