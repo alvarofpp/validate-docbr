@@ -70,3 +70,20 @@ class TestCnpj(unittest.TestCase):
 
         # THEN
         self.assertFalse(validate_return)
+
+    def test_alphanumeric(self):
+        """Testar o método validate do CNPJ em caso de caracteres alfanuméricos."""
+        # GIVEN
+        cases = [
+            ('12.aBc.345/01dE-35', True),
+            ('12ABC34501DE35', True),
+            ('12.ABC.345/01DE-34', False),
+        ]
+
+        # WHEN
+        results = []
+        for doc, is_valid in cases:
+            results.append(self.cnpj.validate(doc) == is_valid)
+
+        # THEN
+        self.assertTrue(all(results))
