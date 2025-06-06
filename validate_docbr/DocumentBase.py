@@ -44,19 +44,14 @@ class DocumentBase(ABC):
             doc_set = set(doc_list)
             unique_values = len(doc_set)
 
-            if unique_values < n:
+            if unique_values < number_of_documents:
                 doc_list = list(doc_set) + self.generate_list(
-                    (n - unique_values), mask, repeat
+                    (number_of_documents - unique_values), mask, repeat
                 )
             else:
                 repeat = True
 
         return doc_list
-
-    @abstractmethod
-    def mask(self, doc: str = "") -> str:
-        """Mascara o documento enviado"""
-        pass
 
     def _only_digits(self, doc: str = "") -> str:
         """Remove os outros caracteres que não sejam dígitos."""
@@ -67,7 +62,7 @@ class DocumentBase(ABC):
         return "".join([x for x in doc if x.isdigit() or x.isalpha()])
 
     def _validate_input(
-        self, input: str, valid_characters: List = None, allow_letters: bool = False
+        self, input: str, valid_characters: list = None, allow_letters: bool = False
     ) -> bool:
         """Validar input.
         Caso ele possua apenas dígitos (e, opcionalmente, letras) e caracteres
