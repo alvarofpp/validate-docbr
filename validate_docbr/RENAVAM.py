@@ -1,10 +1,9 @@
 from random import sample
-from typing import Union
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class RENAVAM(BaseDoc):
+class RENAVAM(DocumentBase):
     """Classe referente ao Registro Nacional de Veículos Automotores (RENAVAM)."""
 
     def __init__(self):
@@ -36,7 +35,7 @@ class RENAVAM(BaseDoc):
         """Coloca a máscara de Renavam na variável doc."""
         return f"{doc[:10]}-{doc[10]}"
 
-    def _generate_last_digit(self, doc: Union[str, list]) -> str:
+    def _generate_last_digit(self, doc: str | list[str]) -> str:
         """Gerar o dígito verificador do Renavam."""
         sequence = '3298765432'
         sum = 0

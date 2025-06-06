@@ -1,10 +1,9 @@
 from random import sample
-from typing import Union
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class PIS(BaseDoc):
+class PIS(DocumentBase):
     """Classe referente ao PIS/NIS/PASEP/NIT."""
 
     def __init__(self):
@@ -36,7 +35,7 @@ class PIS(BaseDoc):
         """Coloca a máscara de PIS/NIS/PASEP/NIT na variável doc."""
         return f"{doc[:3]}.{doc[3:8]}.{doc[8:10]}-{doc[10:]}"
 
-    def _generate_digit(self, doc: Union[str, list]) -> str:
+    def _generate_digit(self, doc: str | list[str]) -> str:
         """Gerar o dígito verificador do PIS/NIS/PASEP/NIT."""
         multipliers = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
         summation = 0

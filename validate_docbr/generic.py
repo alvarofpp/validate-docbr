@@ -1,15 +1,14 @@
 import inspect
-from typing import List, Tuple, Type
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-def validate_docs(documents: List[Tuple[Type[BaseDoc], str]] = list):
+def validate_docs(documents: list[tuple[type[DocumentBase], str]] = list):
     """Recebe uma lista de tuplas (classe, valor) e a valida"""
     validations = []
 
     for doc in documents:
-        if not inspect.isclass(doc[0]) or not issubclass(doc[0], BaseDoc):
+        if not inspect.isclass(doc[0]) or not issubclass(doc[0], DocumentBase):
             raise TypeError(
                 "O primeiro índice da tupla deve ser uma classe de documento!"
             )

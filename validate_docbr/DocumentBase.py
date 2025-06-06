@@ -1,53 +1,57 @@
 from abc import ABC, abstractmethod
-from typing import List
+
+from validate_docbr.exceptions import FunctionNotImplementedError
 
 
-class BaseDoc(ABC):
+class DocumentBase(ABC):
     """Classe base para todas as classes referentes a documentos."""
 
     @abstractmethod
     def validate(self, doc: str = "") -> bool:
         """Método para validar o documento desejado."""
-        pass
-
-    def validate_list(self, docs: List[str]) -> List[bool]:
-        """Método para validar uma lista de documentos desejado."""
-        return [self.validate(doc) for doc in docs]
+        raise FunctionNotImplementedError("validate")
 
     @abstractmethod
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um documento válido."""
-        pass
+        raise FunctionNotImplementedError("generate")
+
+    @abstractmethod
+    def mask(self, doc: str = '') -> str:
+        """Mascara o documento enviado"""
+        raise FunctionNotImplementedError("mask")
+
+    def validate_list(self, docs: list[str]) -> list[bool]:
+        """Método para validar uma lista de documentos desejado."""
+        return [self.validate(doc) for doc in docs]
 
     def generate_list(
-        self, n: int = 1, mask: bool = False, repeat: bool = False
+        self,
+        number_of_documents: int = 1,
+        mask: bool = False,
+        repeat: bool = False
     ) -> list:
         """Gerar uma lista do mesmo documento."""
         doc_list = []
 
-        if n <= 0:
+        if number_of_documents <= 0:
             return doc_list
 
-        for _ in range(n):
+        for _ in range(number_of_documents):
             doc_list.append(self.generate(mask))
 
         while not repeat:
             doc_set = set(doc_list)
             unique_values = len(doc_set)
 
-            if unique_values < n:
+            if unique_values < number_of_documents:
                 doc_list = list(doc_set) + self.generate_list(
-                    (n - unique_values), mask, repeat
+                    (number_of_documents - unique_values), mask, repeat
                 )
             else:
                 repeat = True
 
         return doc_list
-
-    @abstractmethod
-    def mask(self, doc: str = "") -> str:
-        """Mascara o documento enviado"""
-        pass
 
     def _only_digits(self, doc: str = "") -> str:
         """Remove os outros caracteres que não sejam dígitos."""
@@ -58,7 +62,7 @@ class BaseDoc(ABC):
         return "".join([x for x in doc if x.isdigit() or x.isalpha()])
 
     def _validate_input(
-        self, input: str, valid_characters: List = None, allow_letters: bool = False
+        self, input: str, valid_characters: list = None, allow_letters: bool = False
     ) -> bool:
         """Validar input.
         Caso ele possua apenas dígitos (e, opcionalmente, letras) e caracteres
