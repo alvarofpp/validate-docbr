@@ -18,6 +18,9 @@ class CPF(BaseDoc):
 
         doc = list(self._only_digits(doc))
 
+        if len(doc) > 11:
+            return False
+
         if len(doc) < 11:
             doc = self._complete_with_zeros(doc)
 
