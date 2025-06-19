@@ -46,6 +46,10 @@ class CNPJ(BaseDoc):
 
     def mask(self, doc: str = '') -> str:
         """Coloca a máscara de CNPJ na variável doc."""
+        if not self._validate_input(doc, ['.', '/', '-']):
+            # Documento previamente formatado
+            return doc
+        
         return f"{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[-2:]}"
 
     def _generate_first_digit(self, doc: Union[str, list]) -> str:
