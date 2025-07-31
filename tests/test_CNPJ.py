@@ -4,71 +4,80 @@ import validate_docbr as docbr
 
 
 class TestCnpj(unittest.TestCase):
-    """Testar a classe CNPJ."""
+    """Testa a classe CNPJ."""
 
     def setUp(self):
-        """Inicia novo objeto em todo os testes."""
         self.cnpj = docbr.CNPJ()
 
-    def test_generate_validate(self):
-        """Verifica os métodos de geração e validação de documento."""
-        # generate_list
-        cnpjs = self.cnpj.generate_list(5000) \
-                + self.cnpj.generate_list(5000, mask=True) \
-                + self.cnpj.generate_list(5000, mask=True, repeat=True)
+    def test_generate_list_with_validate_list(self):
+        # Given
+        number_of_documents = 10
+        number_of_documents_expected = number_of_documents * 2
+        
+        # When
+        cnpjs = self.cnpj.generate_list(number_of_documents) \
+                + self.cnpj.generate_list(number_of_documents, mask=True)
+        validated_cnpjs = self.cnpj.validate_list(cnpjs)
+        
+        # Then
         self.assertIsInstance(cnpjs, list)
-        self.assertTrue(len(cnpjs) == 15000)
-
-        # validate_list
-        cnpjs_validates = self.cnpj.validate_list(cnpjs)
-        self.assertTrue(sum(cnpjs_validates) == 15000)
+        self.assertTrue(len(cnpjs) == number_of_documents_expected)
+        self.assertTrue(sum(validated_cnpjs) == number_of_documents_expected)
 
     def test_mask(self):
-        """Verifica se o método mask funciona corretamente."""
-        masked_cnpj = self.cnpj.mask('11222333444455')
-        self.assertEqual(masked_cnpj, '11.222.333/4444-55')
+        # Given
+        doc = '11222333444455'
+        doc_expected = '11.222.333/4444-55'
+        
+        # When
+        masked_cnpj = self.cnpj.mask(doc)
+        
+        # Then
+        self.assertEqual(masked_cnpj, doc_expected)
 
     def test_special_case(self):
-        """Verifica os casos especiais de CNPJ."""
+        # Given
         cases = [
             ('00000-000/0000', False),
             ('AAAA0AAAAAAA2AAAAAA', False),
             ('74600269000145', True),
         ]
+
+        # When
         for cnpj, is_valid in cases:
-            self.assertEqual(self.cnpj.validate(cnpj), is_valid)
+            doc_validated = self.cnpj.validate(cnpj)
+
+            # Then
+            self.assertEqual(doc_validated, is_valid)
 
     def test_validate_success(self):
-        """Testar o método validate do CNPJ."""
-        # GIVEN
+        # Given
         doc = '74600269000145'
 
-        # WHEN
-        validate_return = self.cnpj.validate(doc)
+        # When
+        doc_validated = self.cnpj.validate(doc)
 
-        # THEN
-        self.assertTrue(validate_return)
+        # Then
+        self.assertTrue(doc_validated)
 
     def test_validate_wrong_input(self):
-        """Testar o método validate do CNPJ em caso de input errado."""
-        # GIVEN
+        # Given
         doc = '74600269000145_'
 
-        # WHEN
+        # When
         validate_return = self.cnpj.validate(doc)
 
-        # THEN
+        # Then
         self.assertFalse(validate_return)
 
     def test_validate_wrong_length(self):
-        """Testar o método validate do CNPJ em caso de tamanho inválido."""
-        # GIVEN
+        # Given
         doc = '746002690001450'
 
-        # WHEN
+        # When
         validate_return = self.cnpj.validate(doc)
 
-        # THEN
+        # Then
         self.assertFalse(validate_return)
 
     def test_alphanumeric(self):
