@@ -1,9 +1,9 @@
 from random import sample
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class CNS(BaseDoc):
+class CNS(DocumentBase):
     """Classe referente ao Cartão Nacional de Saúde (CNS)."""
 
     def __init__(self):

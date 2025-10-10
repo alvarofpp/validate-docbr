@@ -33,6 +33,11 @@ lint:
 		&& lint-shell-script \
 		&& lint-python"
 
+.PHONY: lint-fix
+lint-fix:
+	@docker pull ${DOCKER_IMAGE_LINTER}
+	@docker run --rm -v ${ROOT}:/app ${DOCKER_IMAGE_LINTER} "lint-python-fix"
+
 .PHONY: test
 test:
 	@docker compose run --rm -v ${ROOT}:/app \
@@ -41,7 +46,7 @@ test:
 
 .PHONY: test-coverage
 test-coverage:
-	@docker compose run --rm -v ${ROOT}:/app \
+	@docker compose run --rm -T -v ${ROOT}:/app \
 		--name ${TEST_CONTAINER_NAME} ${APP_NAME} \
 		/bin/bash -c "pytest --cov=validate_docbr/"
 

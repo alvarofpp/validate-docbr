@@ -1,11 +1,10 @@
 import string
 from random import sample
-from typing import Union
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class CNPJ(BaseDoc):
+class CNPJ(DocumentBase):
     """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ)."""
 
     def __init__(self):
@@ -48,7 +47,7 @@ class CNPJ(BaseDoc):
         """Coloca a máscara de CNPJ na variável doc."""
         return f"{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[-2:]}"
 
-    def _generate_first_digit(self, doc: Union[str, list]) -> str:
+    def _generate_first_digit(self, doc: str | list[str]) -> str:
         """Gerar o primeiro dígito verificador do CNPJ."""
         sum = 0
 
@@ -60,7 +59,7 @@ class CNPJ(BaseDoc):
 
         return str(sum)
 
-    def _generate_second_digit(self, doc: Union[str, list]) -> str:
+    def _generate_second_digit(self, doc: str | list[str]) -> str:
         """Gerar o segundo dígito verificador do CNPJ."""
         sum = 0
 
