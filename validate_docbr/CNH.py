@@ -7,7 +7,7 @@ from .BaseDoc import BaseDoc
 class CNH(BaseDoc):
     """Classe referente ao Carteira Nacional de Habilitação (CNH)."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:

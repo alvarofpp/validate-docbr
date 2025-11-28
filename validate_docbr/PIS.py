@@ -7,7 +7,7 @@ from .BaseDoc import BaseDoc
 class PIS(BaseDoc):
     """Classe referente ao PIS/NIS/PASEP/NIT."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:

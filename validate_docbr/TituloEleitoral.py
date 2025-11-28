@@ -7,7 +7,7 @@ from .BaseDoc import BaseDoc
 class TituloEleitoral(BaseDoc):
     """Classe referente ao Título eleitoral"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
         self.first_check_digit_weights = list(range(2, 10))
         self.second_check_digit_weights = list(range(7, 10))

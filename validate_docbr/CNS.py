@@ -6,7 +6,7 @@ from .BaseDoc import BaseDoc
 class CNS(BaseDoc):
     """Classe referente ao Cartão Nacional de Saúde (CNS)."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
         self.first_digit = [1, 2, 7, 8, 9]
 

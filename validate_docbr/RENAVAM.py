@@ -7,7 +7,7 @@ from .BaseDoc import BaseDoc
 class RENAVAM(BaseDoc):
     """Classe referente ao Registro Nacional de Veículos Automotores (RENAVAM)."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:

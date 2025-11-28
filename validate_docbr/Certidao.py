@@ -6,7 +6,7 @@ from .BaseDoc import BaseDoc
 class Certidao(BaseDoc):
     """Classe referente a Certidão de Nascimento/Casamento/Óbito."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:
