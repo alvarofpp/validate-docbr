@@ -8,7 +8,7 @@ from .BaseDoc import BaseDoc
 class CNPJ(BaseDoc):
     """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ)."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.digits = list(range(10))
         self.digits_and_letters = list(string.ascii_uppercase) + list(string.digits)
         self.weights_first = list(range(5, 1, -1)) + list(range(9, 1, -1))

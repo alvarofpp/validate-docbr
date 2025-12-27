@@ -7,7 +7,7 @@ from .BaseDoc import BaseDoc
 class CPF(BaseDoc):
     """Classe referente ao Cadastro de Pessoas Físicas (CPF)."""
 
-    def __init__(self, repeated_digits: bool = False):
+    def __init__(self, repeated_digits: bool = False) -> None:
         self.digits = list(range(10))
         self.repeated_digits = repeated_digits
 

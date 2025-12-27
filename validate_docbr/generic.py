@@ -4,7 +4,7 @@ from typing import List, Tuple, Type
 from .BaseDoc import BaseDoc
 
 
-def validate_docs(documents: List[Tuple[Type[BaseDoc], str]] = list):
+def validate_docs(documents: List[Tuple[Type[BaseDoc], str]] = list) -> list[bool]:
     """Recebe uma lista de tuplas (classe, valor) e a valida"""
     validations = []
 
