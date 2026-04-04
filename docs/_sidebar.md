@@ -1,0 +1,4 @@
+- [Instalação](/)
+- [Guia de uso](/guia-de-uso.md)
+- [Sobre](/sobre.md)
+- [Licença](/licenca.md)

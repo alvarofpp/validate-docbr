@@ -1,11 +1,10 @@
 from random import sample
-from typing import List
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class TituloEleitoral(BaseDoc):
-    """Classe referente ao Título eleitoral"""
+class TituloEleitoral(DocumentBase):
+    """Classe referente ao Título Eleitoral."""
 
     def __init__(self) -> None:
         self.digits = list(range(10))
@@ -15,7 +14,14 @@ class TituloEleitoral(BaseDoc):
         self.second_check_digit_doc_slice = slice(8, 10)
 
     def validate(self, doc: str = '') -> bool:
-        """Método para validar o título eleitoral."""
+        """Valida o Título Eleitoral.
+
+        Args:
+            doc: Título Eleitoral a ser validado. Aceita com ou sem máscara.
+
+        Returns:
+            True se o Título Eleitoral for válido, False caso contrário.
+        """
         if not self._validate_input(doc, [' ']):
             return False
 
@@ -34,7 +40,15 @@ class TituloEleitoral(BaseDoc):
             and second_check_digit == doc_digits[-1]
 
     def generate(self, mask: bool = False) -> str:
-        """Método para gerar um título eleitoral válido."""
+        """Gera um Título Eleitoral válido.
+
+        Args:
+            mask: Se True, retorna o Título formatado
+                (ex: ``XXXX XXXX XXXX``).
+
+        Returns:
+            Título Eleitoral gerado em formato string.
+        """
         document_digits = [sample(self.digits, 1)[0] for _ in range(8)]
 
         state_identifier = self._generate_valid_state_identifier()
@@ -55,21 +69,30 @@ class TituloEleitoral(BaseDoc):
         return document
 
     def mask(self, doc: str = '') -> str:
-        """Mascara o documento enviado"""
+        """Coloca a máscara de Título Eleitoral no documento.
+
+        Args:
+            doc: Título Eleitoral sem máscara (12 dígitos).
+
+        Returns:
+            Título Eleitoral formatado no padrão ``XXXX XXXX XXXX``.
+        """
         return f'{doc[0:4]} {doc[4:8]} {doc[8:]}'
 
-    def _compute_first_check_digit(self, doc_digits: List[int]) -> int:
-        """Método que calcula o primeiro dígito verificador."""
-        doc_digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
-        terms = [
-            doc_digit * multiplier
-            for doc_digit, multiplier in zip(
-                doc_digits_to_consider,
-                self.first_check_digit_weights
-            )
-        ]
+    def _compute_first_check_digit(self, doc_digits: list[int]) -> int:
+        """Calcula o primeiro dígito verificador.
 
-        total = sum(terms)
+        Args:
+            doc_digits: Lista com os dígitos do Título Eleitoral.
+
+        Returns:
+            Primeiro dígito verificador.
+        """
+        digits_to_consider = doc_digits[self.first_check_digit_doc_slice]
+        total = sum(
+            digit * weight
+            for digit, weight in zip(digits_to_consider, self.first_check_digit_weights)
+        )
 
         if total % 11 == 10:
             return 0
@@ -78,21 +101,27 @@ class TituloEleitoral(BaseDoc):
 
     def _compute_second_check_digit(
             self,
-            doc_digits: List[int],
+            doc_digits: list[int],
             first_check_digit: int
     ) -> int:
-        """Método que calcula o segundo dígito verificador."""
-        doc_digits_to_consider = doc_digits[self.second_check_digit_doc_slice] \
-                                + [first_check_digit]
-        terms = [
-            doc_digit * multiplier
-            for doc_digit, multiplier in zip(
-                doc_digits_to_consider,
-                self.second_check_digit_weights
-            )
-        ]
+        """Calcula o segundo dígito verificador.
 
-        total = sum(terms)
+        Args:
+            doc_digits: Lista com os dígitos do Título Eleitoral.
+            first_check_digit: Valor do primeiro dígito verificador.
+
+        Returns:
+            Segundo dígito verificador.
+        """
+        digits_to_consider = doc_digits[self.second_check_digit_doc_slice] \
+                                + [first_check_digit]
+        total = sum(
+            digit * weight
+            for digit, weight in zip(
+                digits_to_consider,
+                self.second_check_digit_weights,
+            )
+        )
 
         if total % 11 == 10:
             return 0
@@ -100,5 +129,10 @@ class TituloEleitoral(BaseDoc):
         return total % 11
 
     def _generate_valid_state_identifier(self) -> str:
+        """Gera um identificador de estado válido.
+
+        Returns:
+            Identificador de estado com 2 dígitos (``01`` a ``18``).
+        """
         state_identifier = str(sample(range(1, 19), 1)[0])
         return state_identifier.zfill(2)

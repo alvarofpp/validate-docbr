@@ -4,34 +4,41 @@ import validate_docbr as docbr
 
 
 class TestRenavam(unittest.TestCase):
-    """Testar a classe RENAVAM."""
+    """Testa a classe RENAVAM."""
 
     def setUp(self):
-        """Inicia novo objeto em todo os testes."""
         self.renavam = docbr.RENAVAM()
 
-    def test_generate_validate(self):
-        """Verifica os métodos de geração e validação de documento."""
-        # generate_list
-        renavams = (
-                self.renavam.generate_list(1)
-                + self.renavam.generate_list(1, mask=True)
-                + self.renavam.generate_list(1, mask=True, repeat=True)
-        )
-        self.assertIsInstance(renavams, list)
-        self.assertTrue(len(renavams) == 3)
+    def test_generate_list_with_validate_list(self):
+        # Given
+        number_of_documents = 10
+        number_of_documents_expected = number_of_documents * 2
 
-        # validate_list
-        renavams_validates = self.renavam.validate_list(renavams)
-        self.assertTrue(sum(renavams_validates) == 3)
+        # When
+        renavams = (
+                self.renavam.generate_list(number_of_documents)
+                + self.renavam.generate_list(number_of_documents, mask=True)
+        )
+        validated_renavams = self.renavam.validate_list(renavams)
+
+        # Then
+        self.assertIsInstance(renavams, list)
+        self.assertTrue(len(renavams) == number_of_documents_expected)
+        self.assertTrue(sum(validated_renavams) == number_of_documents_expected)
 
     def test_mask(self):
-        """Verifica se o método mask funciona corretamente."""
-        masked_renavam = self.renavam.mask('13824652268')
-        self.assertEqual(masked_renavam, '1382465226-8')
+        # Given
+        doc = '13824652268'
+        doc_expected = '1382465226-8'
+
+        # When
+        masked_renavam = self.renavam.mask(doc)
+
+        # Then
+        self.assertEqual(masked_renavam, doc_expected)
 
     def test_special_case(self):
-        """ Verifica os casos especiais de RENAVAM """
+        # Given
         cases = [
             ('3467875434578764345789654', False),
             ('', False),
@@ -47,5 +54,10 @@ class TestRenavam(unittest.TestCase):
             ('04598137389', True),
             ('05204907510', True),
         ]
+
+        # When
         for renavam, is_valid in cases:
-            self.assertEqual(self.renavam.validate(renavam), is_valid)
+            doc_validated = self.renavam.validate(renavam)
+
+            # Then
+            self.assertEqual(doc_validated, is_valid)

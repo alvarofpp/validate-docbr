@@ -168,11 +168,11 @@ cpf.mask(cpf_me)  # "012.345.678-90"
 Para realizar os testes basta executar o seguinte comando:
 
 ```shell
-make test
+task test
 ```
 
 Para verificar a cobertura de testes:
 
 ```shell
-make test-coverage
+task test-coverage
 ```

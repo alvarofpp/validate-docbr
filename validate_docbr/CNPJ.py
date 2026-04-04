@@ -1,12 +1,15 @@
 import string
 from random import sample
-from typing import Union
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class CNPJ(BaseDoc):
-    """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ)."""
+class CNPJ(DocumentBase):
+    """Classe referente ao Cadastro Nacional da Pessoa Jurídica (CNPJ).
+
+    Aceita tanto o formato numérico tradicional quanto o novo formato
+    alfanumérico. A validação reconhece ambos os formatos automaticamente.
+    """
 
     def __init__(self) -> None:
         self.digits = list(range(10))
@@ -15,7 +18,17 @@ class CNPJ(BaseDoc):
         self.weights_second = list(range(6, 1, -1)) + list(range(9, 1, -1))
 
     def validate(self, doc: str = '') -> bool:
-        """Validar CNPJ."""
+        """Valida o CNPJ.
+
+        Aceita tanto o formato numérico (``XX.XXX.XXX/XXXX-XX``) quanto o
+        formato alfanumérico (``XX.XXX.XXX/XXXX-XX`` com letras).
+
+        Args:
+            doc: CNPJ a ser validado. Aceita com ou sem máscara.
+
+        Returns:
+            True se o CNPJ for válido, False caso contrário.
+        """
         if not self._validate_input(doc, ['.', '/', '-'], allow_letters=True):
             return False
 
@@ -29,14 +42,22 @@ class CNPJ(BaseDoc):
                and self._generate_second_digit(doc) == doc[13]
 
     def generate(self, mask: bool = False, digits_only: bool = True) -> str:
-        """Gerar CNPJ."""
-        # Os doze primeiros dígitos
-        if digits_only:
-            cnpj = [str(sample(self.digits, 1)[0]) for i in range(12)]
-        else:
-            cnpj = [sample(self.digits_and_letters, 1)[0] for i in range(12)]
+        """Gera um CNPJ válido.
 
-        # Gerar os dígitos verificadores
+        Args:
+            mask: Se True, retorna o CNPJ formatado
+                (ex: ``12.345.678/0001-00``).
+            digits_only: Se True, gera apenas com dígitos numéricos.
+                Se False, gera no formato alfanumérico.
+
+        Returns:
+            CNPJ gerado em formato string.
+        """
+        if digits_only:
+            cnpj = [str(sample(self.digits, 1)[0]) for _ in range(12)]
+        else:
+            cnpj = [sample(self.digits_and_letters, 1)[0] for _ in range(12)]
+
         cnpj.append(self._generate_first_digit(cnpj))
         cnpj.append(self._generate_second_digit(cnpj))
 
@@ -45,29 +66,52 @@ class CNPJ(BaseDoc):
         return self.mask(cnpj) if mask else cnpj
 
     def mask(self, doc: str = '') -> str:
-        """Coloca a máscara de CNPJ na variável doc."""
+        """Coloca a máscara de CNPJ no documento.
+
+        Args:
+            doc: CNPJ sem máscara (14 caracteres).
+
+        Returns:
+            CNPJ formatado no padrão ``XX.XXX.XXX/XXXX-XX``.
+        """
         return f"{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[-2:]}"
 
-    def _generate_first_digit(self, doc: Union[str, list]) -> str:
-        """Gerar o primeiro dígito verificador do CNPJ."""
-        sum = 0
+    def _generate_first_digit(self, doc: str | list[str]) -> str:
+        """Gera o primeiro dígito verificador do CNPJ.
 
-        for i in range(12):
-            sum += (ord(str(doc[i])) - 48) * self.weights_first[i]
+        Utiliza aritmética baseada em valores ASCII para suportar
+        caracteres alfanuméricos.
 
-        sum = sum % 11
-        sum = 0 if sum < 2 else 11 - sum
+        Args:
+            doc: String ou lista com os caracteres do CNPJ.
 
-        return str(sum)
+        Returns:
+            Primeiro dígito verificador.
+        """
+        total = sum(
+            (ord(str(doc[position])) - 48) * self.weights_first[position]
+            for position in range(12)
+        )
 
-    def _generate_second_digit(self, doc: Union[str, list]) -> str:
-        """Gerar o segundo dígito verificador do CNPJ."""
-        sum = 0
+        remainder = total % 11
+        return str(0 if remainder < 2 else 11 - remainder)
 
-        for i in range(13):
-            sum += (ord(str(doc[i])) - 48) * self.weights_second[i]
+    def _generate_second_digit(self, doc: str | list[str]) -> str:
+        """Gera o segundo dígito verificador do CNPJ.
 
-        sum = sum % 11
-        sum = 0 if sum < 2 else 11 - sum
+        Utiliza aritmética baseada em valores ASCII para suportar
+        caracteres alfanuméricos.
 
-        return str(sum)
+        Args:
+            doc: String ou lista com os caracteres do CNPJ.
+
+        Returns:
+            Segundo dígito verificador.
+        """
+        total = sum(
+            (ord(str(doc[position])) - 48) * self.weights_second[position]
+            for position in range(13)
+        )
+
+        remainder = total % 11
+        return str(0 if remainder < 2 else 11 - remainder)

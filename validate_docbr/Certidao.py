@@ -1,16 +1,23 @@
 from random import sample
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class Certidao(BaseDoc):
-    """Classe referente a Certidão de Nascimento/Casamento/Óbito."""
+class Certidao(DocumentBase):
+    """Classe referente à Certidão de Nascimento/Casamento/Óbito."""
 
     def __init__(self) -> None:
         self.digits = list(range(10))
 
     def validate(self, doc: str = '') -> bool:
-        """Método para validar a Certidão de Nascimento/Casamento/Óbito."""
+        """Valida a Certidão de Nascimento/Casamento/Óbito.
+
+        Args:
+            doc: Certidão a ser validada. Aceita com ou sem máscara.
+
+        Returns:
+            True se a Certidão for válida, False caso contrário.
+        """
         if not self._validate_input(doc, ['.', '-']):
             return False
 
@@ -19,52 +26,82 @@ class Certidao(BaseDoc):
         if len(doc) != 32:
             return False
 
-        num = list(doc[:-2])
-        dv = doc[-2:]
+        base_digits = list(doc[:-2])
+        check_digits = doc[-2:]
+        expected_check_digits = self._generate_check_digits(base_digits)
 
-        expected_dv = self._generate_verifying_digit(num)
+        return check_digits == expected_check_digits
 
-        if dv == expected_dv:
-            return True
+    def _weighted_sum(self, value: list) -> int:
+        """Calcula a soma ponderada dos dígitos com multiplicador cíclico.
 
-        return False
+        O multiplicador inicia em ``32 - len(value)`` e incrementa a cada
+        posição, reiniciando para 0 quando ultrapassa 10.
 
-    def _weighted_sum(self, value) -> int:
-        sum = 0
+        Args:
+            value: Lista com os dígitos a serem somados.
+
+        Returns:
+            Resultado da soma ponderada.
+        """
+        total = 0
         multiplier = 32 - len(value)
 
-        for i in range(len(value)):
-            sum += int(value[i]) * multiplier
-
+        for digit in value:
+            total += int(digit) * multiplier
             multiplier += 1
-            multiplier = 0 if multiplier > 10 else multiplier
+            if multiplier > 10:
+                multiplier = 0
 
-        return sum
+        return total
 
     def generate(self, mask: bool = False) -> str:
-        """Método para gerar a Certidão de Nascimento/Casamento/Óbito."""
-        # Os trinta primeiros dígitos
-        certidao = [str(sample(self.digits, 1)[0]) for i in range(30)]
+        """Gera uma Certidão de Nascimento/Casamento/Óbito válida.
 
-        # Gerar os dígitos verificadores
-        certidao.append(self._generate_verifying_digit(certidao))
+        Args:
+            mask: Se True, retorna a Certidão formatada
+                (ex: ``XXXXXX.XX.XX.XXXX.X.XXXXX.XXX.XXXXXXX-XX``).
+
+        Returns:
+            Certidão gerada em formato string.
+        """
+        certidao = [str(sample(self.digits, 1)[0]) for _ in range(30)]
+
+        certidao.append(self._generate_check_digits(certidao))
 
         certidao = "".join(certidao)
 
         return self.mask(certidao) if mask else certidao
 
     def mask(self, doc: str = '') -> str:
-        """Mascara para a Certidão de Nascimento/Casamento/Óbito."""
+        """Coloca a máscara de Certidão no documento.
+
+        Args:
+            doc: Certidão sem máscara (32 dígitos).
+
+        Returns:
+            Certidão formatada no padrão
+            ``XXXXXX.XX.XX.XXXX.X.XXXXX.XXX.XXXXXXX-XX``.
+        """
         return "{}.{}.{}.{}.{}.{}.{}.{}-{}".format(
             doc[:6], doc[6:8], doc[8:10], doc[10:14],
             doc[14], doc[15:20], doc[20:23], doc[23:30], doc[-2:])
 
-    def _generate_verifying_digit(self, doc: list) -> str:
-        """Gerar o dígito verificador da Certidao."""
-        dv1 = self._weighted_sum(doc) % 11
-        dv1 = 1 if dv1 > 9 else dv1
+    def _generate_check_digits(self, doc: list) -> str:
+        """Gera os dígitos verificadores da Certidão.
 
-        dv2 = self._weighted_sum(doc+[dv1]) % 11
-        dv2 = 1 if dv2 > 9 else dv2
+        Args:
+            doc: Lista com os dígitos base da Certidão.
 
-        return str(dv1)+str(dv2)
+        Returns:
+            String com os dois dígitos verificadores.
+        """
+        first_digit = self._weighted_sum(doc) % 11
+        if first_digit > 9:
+            first_digit = 1
+
+        second_digit = self._weighted_sum(doc + [first_digit]) % 11
+        if second_digit > 9:
+            second_digit = 1
+
+        return str(first_digit) + str(second_digit)

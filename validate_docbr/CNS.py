@@ -1,9 +1,9 @@
 from random import sample
 
-from .BaseDoc import BaseDoc
+from validate_docbr.DocumentBase import DocumentBase
 
 
-class CNS(BaseDoc):
+class CNS(DocumentBase):
     """Classe referente ao Cartão Nacional de Saúde (CNS)."""
 
     def __init__(self) -> None:
@@ -11,7 +11,14 @@ class CNS(BaseDoc):
         self.first_digit = [1, 2, 7, 8, 9]
 
     def validate(self, doc: str = '') -> bool:
-        """Validar CNS."""
+        """Valida o CNS.
+
+        Args:
+            doc: CNS a ser validado. Aceita com ou sem máscara.
+
+        Returns:
+            True se o CNS for válido, False caso contrário.
+        """
         if not self._validate_input(doc, [' ']):
             return False
 
@@ -23,25 +30,43 @@ class CNS(BaseDoc):
         return self._check_cns_valid(doc)
 
     def _validate_first_case(self, doc: list) -> bool:
-        """Validar CNSs que comecem com 1 ou 2."""
-        cns = self._generate_first_case(doc)
+        """Valida CNSs que comecem com 1 ou 2.
 
+        Args:
+            doc: Lista com os dígitos do CNS.
+
+        Returns:
+            True se o CNS for válido.
+        """
+        cns = self._generate_first_case(doc)
         return cns == doc
 
     def _validate_second_case(self, doc: list) -> bool:
-        """Validar CNSs que comecem com 7, 8 ou 9."""
-        sum = self._sum_algorithm(doc)
+        """Valida CNSs que comecem com 7, 8 ou 9.
 
-        return sum % 11 == 0
+        Args:
+            doc: Lista com os dígitos do CNS.
+
+        Returns:
+            True se o CNS for válido.
+        """
+        total = self._weighted_sum(doc)
+        return total % 11 == 0
 
     def generate(self, mask: bool = False) -> str:
-        """Gerar CNS."""
-        # Primeiro dígito válido
+        """Gera um CNS válido.
+
+        Args:
+            mask: Se True, retorna o CNS formatado
+                (ex: ``XXX XXXX XXXX XXXX``).
+
+        Returns:
+            CNS gerado em formato string.
+        """
         cns = [str(sample(self.first_digit, 1)[0])]
 
-        # Geração irá depender do resultado do primeiro dígito
         if cns[0] in ['1', '2']:
-            cns = self._generate_first_case(cns, True)
+            cns = self._generate_first_case(cns, random_digits=True)
         else:
             cns = self._generate_second_case(cns)
 
@@ -50,87 +75,117 @@ class CNS(BaseDoc):
         return self.mask(cns) if mask else cns
 
     def mask(self, doc: str = '') -> str:
-        """Coloca a máscara de CPF na variável doc."""
+        """Coloca a máscara de CNS no documento.
+
+        Args:
+            doc: CNS sem máscara (15 dígitos).
+
+        Returns:
+            CNS formatado no padrão ``XXX XXXX XXXX XXXX``.
+        """
         return f"{doc[:3]} {doc[3:7]} {doc[7:11]} {doc[-4:]}"
 
-    def _generate_first_case(self, cns: list, generate_random=False) -> list:
-        """Gera um CNS válido para os casos que se inicia com 1 ou 2."""
-        if generate_random:
-            # Adiciona os próximos 10 dígitos
-            cns = cns + [str(sample(self.digits, 1)[0]) for i in range(10)]
+    def _generate_first_case(self, cns: list, random_digits: bool = False) -> list:
+        """Gera um CNS válido para os casos que se iniciam com 1 ou 2.
+
+        Args:
+            cns: Lista com os dígitos iniciais do CNS.
+            random_digits: Se True, gera dígitos aleatórios para completar.
+
+        Returns:
+            Lista com os 15 dígitos do CNS gerado.
+        """
+        if random_digits:
+            cns = cns + [str(sample(self.digits, 1)[0]) for _ in range(10)]
         else:
-            # Pega apenas a parte que precisamos do CNS
             cns = cns[:11]
 
-        # Processo de soma
-        sum = self._sum_algorithm(cns, 11)
+        total = self._weighted_sum(cns, 11)
+        check_digit = 11 - (total % 11)
 
-        dv = 11 - (sum % 11)
+        if check_digit == 11:
+            check_digit = 0
 
-        if dv == 11:
-            dv = 0
-
-        if dv == 10:
-            sum += 2
-            dv = 11 - (sum % 11)
-            cns = cns + ['0', '0', '1', str(dv)]
+        if check_digit == 10:
+            total += 2
+            check_digit = 11 - (total % 11)
+            cns = cns + ['0', '0', '1', str(check_digit)]
         else:
-            cns = cns + ['0', '0', '0', str(dv)]
+            cns = cns + ['0', '0', '0', str(check_digit)]
 
         return cns
 
     def _generate_second_case(self, cns: list) -> list:
-        """Gera um CNS válido para os casos que se inicia com 7, 8 ou 9."""
-        # Gerar os próximos 14 dígitos
-        cns = cns + [str(sample(list(range(10)), 1)[0]) for i in range(14)]
-        sum = self._sum_algorithm(cns)
-        rest = sum % 11
+        """Gera um CNS válido para os casos que se iniciam com 7, 8 ou 9.
 
-        if rest == 0:
+        Args:
+            cns: Lista com o primeiro dígito do CNS.
+
+        Returns:
+            Lista com os 15 dígitos do CNS gerado.
+        """
+        cns = cns + [str(sample(list(range(10)), 1)[0]) for _ in range(14)]
+        total = self._weighted_sum(cns)
+        remainder = total % 11
+
+        if remainder == 0:
             return cns
 
-        # Resto para o próximo múltiplo de 11
-        diff = 11 - rest
+        diff = 11 - remainder
+        return self._adjust_cns(cns, 15 - diff, diff)
 
-        # Verificar qual é o mais próximo
-        return self._change_cns(cns, 15 - diff, diff)
+    def _adjust_cns(self, cns: list, position: int, remainder: int) -> list:
+        """Ajusta o CNS recursivamente para que atenda as regras de validade.
 
-    def _change_cns(self, cns: list, i: int, val: int) -> list:
-        """Altera o CNS recursivamente para que atenda as especificações de
-        validade dele."""
-        if val == 0:
+        Args:
+            cns: Lista com os dígitos do CNS.
+            position: Posição atual sendo ajustada.
+            remainder: Valor restante para ajuste.
+
+        Returns:
+            Lista com os dígitos do CNS válido.
+        """
+        if remainder == 0:
             if self._check_cns_valid(cns):
                 return cns
-            else:
-                sum = self._sum_algorithm(cns)
-                diff = 15 - (sum % 11)
-                return self._change_cns(cns, 15 - diff, diff)
+            total = self._weighted_sum(cns)
+            diff = 15 - (total % 11)
+            return self._adjust_cns(cns, 15 - diff, diff)
 
-        if 15 - i > val:
-            i += 1
-            return self._change_cns(cns, i, val)
+        if 15 - position > remainder:
+            return self._adjust_cns(cns, position + 1, remainder)
 
-        if cns[i] != '9':
-            cns[i] = str(int(cns[i]) + 1)
-            val -= (15 - i)
+        if cns[position] != '9':
+            cns[position] = str(int(cns[position]) + 1)
+            remainder -= (15 - position)
         else:
-            val += (15 - i)
-            cns[i] = str(int(cns[i]) - 1)
-            i -= 1
+            remainder += (15 - position)
+            cns[position] = str(int(cns[position]) - 1)
+            position -= 1
 
-        return self._change_cns(cns, i, val)
+        return self._adjust_cns(cns, position, remainder)
 
-    def _sum_algorithm(self, cns: list, n: int = 15) -> int:
-        """Realiza o processo de soma necessária para o CNS."""
-        sum = 0
-        for i in range(n):
-            sum += int(cns[i]) * (15 - i)
+    def _weighted_sum(self, cns: list, length: int = 15) -> int:
+        """Realiza o processo de soma ponderada necessária para o CNS.
 
-        return sum
+        Args:
+            cns: Lista com os dígitos do CNS.
+            length: Quantidade de dígitos a considerar na soma.
+
+        Returns:
+            Resultado da soma ponderada.
+        """
+        return sum(int(cns[position]) * (15 - position) for position in range(length))
 
     def _check_cns_valid(self, cns: list) -> bool:
-        """Checa se o CNS é válido."""
+        """Verifica se o CNS é válido de acordo com o primeiro dígito.
+
+        Args:
+            cns: Lista com os dígitos do CNS.
+
+        Returns:
+            True se o CNS for válido.
+        """
         if cns[0] in ['1', '2']:
             return self._validate_first_case(cns)
-        else:
-            return self._validate_second_case(cns)
+        return self._validate_second_case(cns)

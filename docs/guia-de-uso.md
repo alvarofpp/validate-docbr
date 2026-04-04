@@ -1,15 +1,17 @@
 # Guia de uso
 
-Todos os documentos possuem os mesmos métodos e funcionam da mesma forma.
+Todos os documentos possuem os mesmos métodos e funcionam
+da mesma forma.
 
 ## validate
 
-Valida o documento passado como argumento. Retorna um `bool`, `True` caso seja válido,
-`False` caso contrário. Recebe os parâmetros:
+Valida o documento passado como argumento. Retorna um `bool`,
+`True` caso seja válido, `False` caso contrário.
+Recebe os parâmetros:
 
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `doc` | `str`| `''` | X | O documento que se quer validar. |
+| Parâmetro | Tipo  | Valor padrão | Obrigatório | Descrição          |
+| --------- | ----- | ------------ | ----------- | ------------------ |
+| `doc`     | `str` | `''`         | X           | Documento a validar. |
 
 ```python
 from validate_docbr import CPF
@@ -23,30 +25,29 @@ cpf.validate("012.345.678-91")  # False
 
 ### Caso especial de CPF
 
-Os CPFs de 000.000.000-00 até 999.999.999-99 são considerados como válidos pois, em alguns casos,
-existem pessoas vinculadas a eles. Usei a base de dados da
+Os CPFs de 000.000.000-00 até 999.999.999-99 são
+considerados como válidos pois, em alguns casos, existem
+pessoas vinculadas a eles. Usei a base de dados da
 [Coleção de CNPJs e CPFs brasileiros do Brasil.IO][brasil.io]
 para verificar esses documentos:
 
-<!-- markdownlint-disable MD013 -->
+| CPF | Pessoa |
+| --- | ------ |
+| 000.000.000-00 | - |
+| 111.111.111-11 | AKA CENTRAL PARK - NEW YORK |
+| 222.222.222-22 | - |
+| 333.333.333-33 | - |
+| 444.444.444-44 | - |
+| 555.555.555-55 | ISAEL HERMINIO DA SILVA |
+| 666.666.666-66 | - |
+| 777.777.777-77 | ANTONIO GONÇALO DA SILVA |
+| 888.888.888-88 | - |
+| 999.999.999-99 | JOAQUIM ROCHA MATOS |
 
-| CPF | Pessoa | Consulta |
-| --- | ------ | -------- |
-| 000.000.000-00 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=00000000000&document_type=CPF&document=&name=&sources=` |
-| 111.111.111-11 | AKA CENTRAL PARK - NEW YORK | `https://brasil.io/dataset/documentos-brasil/documents?search=11111111111&document_type=CPF&document=&name=&sources=` |
-| 222.222.222-22 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=22222222222&document_type=CPF&document=&name=&sources=` |
-| 333.333.333-33 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=33333333333&document_type=CPF&document=&name=&sources=` |
-| 444.444.444-44 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=44444444444&document_type=CPF&document=&name=&sources=` |
-| 555.555.555-55 | ISAEL HERMINIO DA SILVA | `https://brasil.io/dataset/documentos-brasil/documents?search=55555555555&document_type=CPF&document=&name=&sources=` |
-| 666.666.666-66 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=66666666666&document_type=CPF&document=&name=&sources=` |
-| 777.777.777-77 | ANTONIO GONÇALO DA SILVA | `https://brasil.io/dataset/documentos-brasil/documents?search=77777777777&document_type=CPF&document=&name=&sources=` |
-| 888.888.888-88 | - | `https://brasil.io/dataset/documentos-brasil/documents?search=88888888888&document_type=CPF&document=&name=&sources=` |
-| 999.999.999-99 | JOAQUIM ROCHA MATOS | `https://brasil.io/dataset/documentos-brasil/documents?search=99999999999&document_type=CPF&document=&name=&sources=` |
-
-<!-- markdownlint-enable MD013 -->
-
-Porém, é comum optar por não validar esses CPFs. Para isso basta usar o parâmetro `repeated_digits`
-(por padrão é `False`) da classe `CPF` ou mudar a variável de mesmo nome no objeto criado.
+Porém, é comum optar por não validar esses CPFs. Para isso
+basta usar o parâmetro `repeated_digits` (por padrão é
+`False`) da classe `CPF` ou mudar a variável de mesmo nome
+no objeto criado.
 
 ```python
 from validate_docbr import CPF
@@ -65,12 +66,13 @@ cpf.validate("111.111.111-11")  # False
 
 ## validate_list
 
-Valida uma lista de documentos passado como argumento. Retorna uma lista de `bool`,
-`True` caso seja válido, `False` caso contrário. Recebe os parâmetros:
+Valida uma lista de documentos passado como argumento.
+Retorna uma lista de `bool`, `True` caso seja válido,
+`False` caso contrário. Recebe os parâmetros:
 
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `docs` | `List[str]`| `[]` | X | A lista de documentos para validar. |
+| Parâmetro | Tipo         | Valor padrão | Obrigatório | Descrição       |
+| --------- | ------------ | ------------ | ----------- | --------------- |
+| `docs`    | `list[str]`  | `[]`         | X           | Lista de docs.  |
 
 ```python
 from validate_docbr import CPF
@@ -78,45 +80,47 @@ from validate_docbr import CPF
 cpf = CPF()
 
 # Validar CPFs
-cpf.validate_list(["012.345.678-90", "012.345.678-91"])  # [True, False]
+cpf.validate_list(["012.345.678-90", "012.345.678-91"])
+# [True, False]
 ```
 
 ## validate_docs
 
-**Observação**: diferente dos outros métodos, esse método é do escopo global do pacote,
-não precisa-se instanciar uma classe para uso.
+**Observação**: diferente dos outros métodos, esse método é
+do escopo global do pacote, não precisa-se instanciar uma
+classe para uso.
 
-Valida vários documentos difererentes. Retorna uma lista com valores `bool` para cada tupla
-da lista (na mesma ordem), `True` caso seja válido, `False` caso contrário. Recebe os parâmetros:
+Valida vários documentos diferentes. Retorna uma lista com
+valores `bool` para cada tupla da lista (na mesma ordem),
+`True` caso seja válido, `False` caso contrário.
+Recebe os parâmetros:
 
-<!-- markdownlint-disable MD013 -->
+| Parâmetro   | Tipo                | Obrigatório | Descrição       |
+| ----------- | ------------------- | ----------- | --------------- |
+| `documents` | `list[tuple[...]]`  | X           | Lista de tuplas.|
 
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `documents` | `List[Tuple[BaseDoc, str]]`| `[]` | X | Lista de tuplas, cada tupla possui como primeiro elemento o tipo de documento e o segundo elemento o valor que se deseja validar. |
-
-<!-- markdownlint-enable MD013 -->
+Cada tupla possui como primeiro elemento o tipo de documento
+(`DocumentBase`) e o segundo o valor que se deseja validar.
 
 ```python
 import validate_docbr as docbr
 
-
 # Validar diferentes documentos
-docs = [(docbr.CPF, '90396100457'), (docbr.CNPJ, '49910753848365')]
+docs = [
+    (docbr.CPF, '90396100457'),
+    (docbr.CNPJ, '49910753848365'),
+]
 docbr.validate_docs(docs)  # [True, False]
 ```
 
 ## generate
 
-Gera um novo documento, retorna em formato de `str`. Recebe os parâmetros:
+Gera um novo documento, retorna em formato de `str`.
+Recebe os parâmetros:
 
-<!-- markdownlint-disable MD013 -->
-
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `mask` | `bool` | `False` | - | Quando possui o valor `True`, o documento retornado estará formatado. |
-
-<!-- markdownlint-enable MD013 -->
+| Parâmetro | Tipo   | Valor padrão | Obrigatório | Descrição        |
+| --------- | ------ | ------------ | ----------- | ---------------- |
+| `mask`    | `bool` | `False`      | -           | Retorna com máscara. |
 
 ```python
 from validate_docbr import CPF
@@ -130,13 +134,14 @@ new_cpf_two = cpf.generate(True)  # "012.345.678-90"
 
 ## generate_list
 
-Gera uma lista de documentos, retorna em formato de `list` com elementos do tipo `str`. Recebe os parâmetros:
+Gera uma lista de documentos, retorna em formato de `list`
+com elementos do tipo `str`. Recebe os parâmetros:
 
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `n` | `int` | `1` | X | A quantidade desejada de documentos que serão gerados. |
-| `mask` | `bool` | `False` | - | Se os documentos gerados deverão ter ou não máscara. |
-| `repeat` | `bool` | `False` | - | Se aceita ou não documentos repetidos. |
+| Parâmetro | Tipo   | Valor padrão | Obrigatório | Descrição       |
+| --------- | ------ | ------------ | ----------- | --------------- |
+| `n`       | `int`  | `1`          | X           | Quantidade.     |
+| `mask`    | `bool` | `False`      | -           | Com máscara.    |
+| `repeat`  | `bool` | `False`      | -           | Aceita repetidos. |
 
 ```python
 from validate_docbr import CPF
@@ -144,17 +149,20 @@ from validate_docbr import CPF
 cpf = CPF()
 
 # Gerar lista de CPFs
-cpfs_one = cpf.generate_list(2)  # [ "85215667438", "28293145811" ]
-cpfs_two = cpf.generate_list(2, True)  # [ "852.156.674-38", "282.931.458-11" ]
+cpfs_one = cpf.generate_list(2)
+# [ "85215667438", "28293145811" ]
+cpfs_two = cpf.generate_list(2, True)
+# [ "852.156.674-38", "282.931.458-11" ]
 ```
 
 ## mask
 
-Mascara o documento passado como argumento. Retorna um `str` que é o documento mascarado. Recebe os parâmetros:
+Mascara o documento passado como argumento. Retorna um `str`
+que é o documento mascarado. Recebe os parâmetros:
 
-| Parâmetro | Tipo | Valor padrão | Obrigatório | Descrição |
-| --------- | ---- | ----------- | ------------ | --------- |
-| `doc` | `str`| `''` | X | O documento que se quer mascarar. |
+| Parâmetro | Tipo  | Valor padrão | Obrigatório | Descrição          |
+| --------- | ----- | ------------ | ----------- | ------------------ |
+| `doc`     | `str` | `''`         | X           | Documento a mascarar. |
 
 ```python
 from validate_docbr import CPF

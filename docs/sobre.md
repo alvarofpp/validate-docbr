@@ -8,7 +8,9 @@ Documentos que estão no pacote:
 
 - CPF: Cadastro de Pessoas Físicas;
 - CNH: Carteira Nacional de Habilitação;
-- CNPJ: Cadastro Nacional da Pessoa Jurídica;
+- CNPJ: Cadastro Nacional da Pessoa Jurídica (numérico e alfanumérico);
 - CNS: Cartão Nacional de Saúde;
 - PIS: PIS/NIS/PASEP/NIT;
-- Título Eleitoral: Cadastro que permite cidadãos brasileiros votar.
+- Título Eleitoral: Cadastro que permite cidadãos brasileiros votar;
+- RENAVAM: Registro Nacional de Veículos Automotores;
+- Certidão: Certidão de Nascimento/Casamento/Óbito.

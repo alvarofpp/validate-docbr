@@ -1,0 +1,76 @@
+---
+version: '3'
+
+vars:
+  APP_NAME: app
+  ROOT:
+    sh: pwd
+  DOCKER_IMAGE_LINTER: alvarofpp/linter:latest
+  LINT_COMMIT_TARGET_BRANCH: origin/main
+  TEST_CONTAINER_NAME: '{{.APP_NAME}}_test'
+
+tasks:
+  install-hooks:
+    desc: Configura o git para usar os hooks do projeto
+    cmds:
+      - git config core.hooksPath .githooks
+
+  build:
+    desc: Builda a imagem Docker do projeto
+    deps:
+      - install-hooks
+    cmds:
+      - docker compose build --pull
+
+  build-no-cache:
+    desc: Builda a imagem Docker sem cache
+    deps:
+      - install-hooks
+    cmds:
+      - docker compose build --no-cache --pull
+
+  lint:
+    desc: Executa todos os linters
+    cmds:
+      - docker pull {{.DOCKER_IMAGE_LINTER}}
+      - >-
+        docker run --rm -v {{.ROOT}}:/app {{.DOCKER_IMAGE_LINTER}}
+        "lint-commit {{.LINT_COMMIT_TARGET_BRANCH}}
+        && lint-markdown
+        && lint-dockerfile
+        && lint-yaml
+        && lint-shell-script
+        && lint-python"
+
+  lint-fix:
+    desc: Corrige problemas de lint do Python automaticamente
+    cmds:
+      - docker pull {{.DOCKER_IMAGE_LINTER}}
+      - docker run --rm -v {{.ROOT}}:/app {{.DOCKER_IMAGE_LINTER}} "lint-python-fix"
+
+  test:
+    desc: Executa os testes com pytest
+    cmds:
+      - >-
+        docker compose run --rm -v {{.ROOT}}:/app
+        --name {{.TEST_CONTAINER_NAME}} {{.APP_NAME}}
+        pytest
+
+  test-coverage:
+    desc: Executa os testes com cobertura (threshold 98%)
+    cmds:
+      - >-
+        docker compose run --rm -T -v {{.ROOT}}:/app
+        --name {{.TEST_CONTAINER_NAME}} {{.APP_NAME}}
+        /bin/bash -c "pytest --cov=validate_docbr/"
+
+  ci:
+    desc: Executa lint e testes com cobertura (usado no CI)
+    cmds:
+      - task: lint
+      - task: test-coverage
+
+  shell:
+    desc: Abre um shell bash no container
+    cmds:
+      - docker compose run --rm {{.APP_NAME}} bash
