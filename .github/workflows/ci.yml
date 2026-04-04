@@ -1,13 +1,10 @@
 ---
-name: Integration
+name: CI
 
 on:
   pull_request:
     branches:
       - main
-
-env:
-  DOCKER_IMAGE: alvarofpp/app:${{ github.sha }}
 
 jobs:
   lint:
@@ -27,14 +24,18 @@ jobs:
       - run: lint-yaml
       - run: lint-shell-script
       - run: lint-python
+
   tests:
     needs: lint
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
-      - run: docker build -t $DOCKER_IMAGE .
-      - run: |
-          docker run --rm -v $(pwd):/app $DOCKER_IMAGE /bin/bash -c \
-          "pytest --cov=validate_docbr/"
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+      - run: pip install -r requirements.txt
+      - run: pytest --cov=validate_docbr/

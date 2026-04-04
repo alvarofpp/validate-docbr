@@ -86,7 +86,7 @@ that validates heterogeneous document lists.
 
 - **Pre-push hook** runs lint + test-coverage
   (installed via `task build`)
-- **GitHub Actions** (`integration.yml`) runs lint then tests
+- **GitHub Actions** (`ci.yml`) runs lint then tests
   on PRs to `main`
 - Coverage must stay at or above **98.00%**
 
