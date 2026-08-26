@@ -9,6 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v2
+        id: add
         with:
           project-url: https://github.com/users/alvarofpp/projects/3
           github-token: ${{ secrets.PROJECT_PAT }}
+
+      # O workflow embutido do project só seta Status; Priority tem que vir daqui.
+      - name: Set priority
+        if: steps.add.outputs.itemId != ''
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_PAT }}
+        run: |
+          gh project item-edit \
+            --id "${{ steps.add.outputs.itemId }}" \
+            --project-id PVT_kwHOAKUO1s4BhWjn \
+            --field-id PVTSSF_lAHOAKUO1s4BhWjnzhgSlyk \
+            --single-select-option-id 724ae565
