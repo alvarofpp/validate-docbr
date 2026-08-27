@@ -1,4 +1,6 @@
 import unittest
+from importlib import import_module
+from unittest.mock import patch
 
 import validate_docbr as docbr
 
@@ -27,6 +29,36 @@ class TestTituloEleitoral(unittest.TestCase):
         self.assertTrue(len(titulos_eleitorais) == number_of_documents_expected)
         self.assertTrue(
             sum(validated_titulos_eleitorais) == number_of_documents_expected
+        )
+
+    def test_generate_reaches_all_state_identifiers(self):
+        # Given
+        expected_state_identifiers = [
+            f'{state_identifier:02}' for state_identifier in range(1, 29)
+        ]
+        state_indexes = iter(range(len(expected_state_identifiers)))
+
+        def deterministic_sample(population, _):
+            if population is self.titulo_eleitoral.digits:
+                return [population[0]]
+            return [population[next(state_indexes)]]
+
+        # When
+        titulo_eleitoral_module = import_module('validate_docbr.TituloEleitoral')
+        with patch.object(
+            titulo_eleitoral_module,
+            'sample',
+            side_effect=deterministic_sample,
+        ):
+            generated_state_identifiers = [
+                self.titulo_eleitoral.generate()[8:10]
+                for _ in expected_state_identifiers
+            ]
+
+        # Then
+        self.assertEqual(
+            generated_state_identifiers,
+            expected_state_identifiers,
         )
 
     def test_mask(self):
