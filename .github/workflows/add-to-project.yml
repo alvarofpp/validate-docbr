@@ -14,20 +14,27 @@ jobs:
           project-url: https://github.com/users/alvarofpp/projects/3
           github-token: ${{ secrets.PROJECT_PAT }}
 
-      # O workflow embutido do project só seta Status; Priority tem que vir daqui.
-      - name: Set priority
+      # O workflow embutido "Item added to project" está desligado e não há
+      # mutation pra religá-lo, então Status e Priority saem daqui. Sem isso o
+      # card entra sem coluna e só ganha Status quando o `gh:defaults` roda no
+      # notebook — issue aberta pelo celular fica invisível no board até lá.
+      - name: Set defaults
         if: steps.add.outputs.itemId != ''
         env:
           GH_TOKEN: ${{ secrets.PROJECT_PAT }}
         run: |
-          gh api graphql -f query='
-            mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: $project, itemId: $item, fieldId: $field,
-                value: { singleSelectOptionId: $option }
-              }) { projectV2Item { id } }
-            }' \
-            -f project=PVT_kwHOAKUO1s4BhWjn \
-            -f item="${{ steps.add.outputs.itemId }}" \
-            -f field=PVTSSF_lAHOAKUO1s4BhWjnzhgSlyk \
-            -f option=724ae565
+          # <field-id>:<option-id> — Status=Backlog, Priority=P3
+          for pair in PVTSSF_lAHOAKUO1s4BhWjnzhgSlw0:2110de96 \
+                      PVTSSF_lAHOAKUO1s4BhWjnzhgSlyk:724ae565; do
+            gh api graphql -f query='
+              mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $project, itemId: $item, fieldId: $field,
+                  value: { singleSelectOptionId: $option }
+                }) { projectV2Item { id } }
+              }' \
+              -f project=PVT_kwHOAKUO1s4BhWjn \
+              -f item="${{ steps.add.outputs.itemId }}" \
+              -f field="${pair%%:*}" \
+              -f option="${pair##*:}"
+          done
