@@ -22,10 +22,39 @@ jobs:
         if: steps.add.outputs.itemId != ''
         env:
           GH_TOKEN: ${{ secrets.PROJECT_PAT }}
+          PROJECT_ID: PVT_kwHOAKUO1s4BhWjn
+          ITEM_ID: ${{ steps.add.outputs.itemId }}
         run: |
-          # <field-id>:<option-id> — Status=Backlog, Priority=P3
-          for pair in PVTSSF_lAHOAKUO1s4BhWjnzhgSlw0:2110de96 \
-                      PVTSSF_lAHOAKUO1s4BhWjnzhgSlyk:724ae565; do
+          set -euo pipefail
+
+          # Resolve field/option por NOME. Editar uma opção do single-select
+          # regenera o id dela: id fixo aqui quebra calado e o card entra sem
+          # coluna (aconteceu em 2026-08-31, opção Backlog).
+          fields=$(gh api graphql -f query='
+            query($project: ID!) {
+              node(id: $project) {
+                ... on ProjectV2 {
+                  fields(first: 50) {
+                    nodes {
+                      ... on ProjectV2SingleSelectField {
+                        id name options { id name }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f project="$PROJECT_ID")
+
+          set_field() {
+            local pair
+            pair=$(printf '%s' "$fields" | jq -r --arg f "$1" --arg o "$2" '
+              .data.node.fields.nodes[]
+              | select(.name == $f)
+              | .id + " " + first(.options[] | select(.name | startswith($o)) | .id)')
+            if [ -z "$pair" ]; then
+              echo "::error::campo/opção não encontrado no board: $1=$2"
+              exit 1
+            fi
             gh api graphql -f query='
               mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
                 updateProjectV2ItemFieldValue(input: {
@@ -33,8 +62,11 @@ jobs:
                   value: { singleSelectOptionId: $option }
                 }) { projectV2Item { id } }
               }' \
-              -f project=PVT_kwHOAKUO1s4BhWjn \
-              -f item="${{ steps.add.outputs.itemId }}" \
-              -f field="${pair%%:*}" \
-              -f option="${pair##*:}"
-          done
+              -f project="$PROJECT_ID" \
+              -f item="$ITEM_ID" \
+              -f field="${pair%% *}" \
+              -f option="${pair##* }"
+          }
+
+          set_field Status Backlog
+          set_field Priority P3
