@@ -19,9 +19,14 @@ valida contra `.claude/agents/`. Instrução vai na Lente.
 
 ## Transversais
 
-Entram em toda revisão, independente do contexto tocado:
+Entram numa revisão quando o **gatilho** dispara, não por padrão — revisor acordado
+por reflexo é ruído no veredito e come o teto de 5 do `/review-pr`. `sempre` é o
+gatilho de quem entra em toda revisão; glob casa contra os arquivos do diff;
+palavra casa, sem distinguir maiúscula, contra caminhos e texto do diff.
 
-- `reviewer` — repositório **público** de biblioteca instalada por terceiros: API estável, sem segredo, sem dado de exemplo que seja documento real de alguém.
+| Agente | Gatilho | Lente |
+|---|---|---|
+| `reviewer` | `sempre` | repositório **público** de biblioteca instalada por terceiros: API estável, sem segredo, sem dado de exemplo que seja documento real de alguém. |
 
 ## Catálogo
 
