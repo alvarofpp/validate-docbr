@@ -1,0 +1,6 @@
+# Copiado do checkout principal pra cada worktree nova (o Orca lê este arquivo).
+# Só caminho literal; entrada que não existe é ignorada em silêncio.
+# Permissões que você já aprovou neste projeto. Sem isto, worktree nova nasce
+# sem elas (o arquivo é gitignored) e cada sessão do fluxo volta a pedir
+# aprovação — que ninguém responde, porque não há humano na worktree.
+.claude/settings.local.json
