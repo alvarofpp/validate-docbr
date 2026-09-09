@@ -16,6 +16,7 @@ valida contra `.claude/agents/`. Instrução vai na Lente.
 | testes | `tests/` | `test-runner`, `python-expert` | Documento novo suportado precisa de caso válido, inválido e de borda (tudo zero, tamanho errado, com e sem máscara). |
 | empacotamento | `Dockerfile`, `docker-compose.yml`, `Taskfile.yml`, `.github/`, `uv.lock` | `python-expert` | Dependência nova numa lib pública é custo pra quem instala: justifique. `uv.lock` acompanha o `pyproject.toml` no mesmo PR. |
 | docs | `docs/`, `README.md`, `CONTRIBUTING.md`, `CLAUDE.md` | `reviewer` | README é a porta de entrada da lib: exemplo que não roda é bug. Doc em pt-BR. |
+| toolchain de agentes | `.claude/**`, `.githooks/**`, `.lint/**` | `reviewer` | Config de agente é o que decide QUEM revisa o quê: `description` ambígua acorda o especialista errado em toda revisão, e agente sem gatilho declarado nos transversais vira ruído no veredito. Command novo confere com as vizinhas (frontmatter, `allowed-tools`). Skill copiada da global SOMBREIA a global — só se justifica pelo que é daqui (`task ai:skills-drift` mede o vão). |
 
 ## Transversais
 
