@@ -8,7 +8,7 @@ when working with code in this repository.
 **validate-docbr** is a Python package for validating and
 generating Brazilian documents (CPF, CNPJ, CNH, CNS, PIS,
 Título Eleitoral, RENAVAM, Certidão). Published on PyPI as
-`validate-docbr`, version **2.0.0**.
+`validate-docbr`, version **2.0.1**.
 
 ## Language Conventions
 
