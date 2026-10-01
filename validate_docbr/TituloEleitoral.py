@@ -21,6 +21,7 @@ class TituloEleitoral(DocumentBase):
         self.second_check_digit_weights = list(range(7, 10))
         self.first_check_digit_doc_slice = slice(0, 8)
         self.second_check_digit_doc_slice = slice(8, 10)
+        self.state_identifiers = range(1, 29)
 
     def validate(self, doc: str = '') -> bool:
         """Valida o Título Eleitoral.
@@ -37,6 +38,10 @@ class TituloEleitoral(DocumentBase):
         doc_digits = list(map(int, self._only_digits(doc=doc)))
 
         if len(doc_digits) != 12:
+            return False
+
+        state_identifier = doc_digits[8] * 10 + doc_digits[9]
+        if state_identifier not in self.state_identifiers:
             return False
 
         first_check_digit = self._compute_first_check_digit(doc_digits=doc_digits)
@@ -144,5 +149,5 @@ class TituloEleitoral(DocumentBase):
         Returns:
             Identificador de estado com 2 dígitos (``01`` a ``28``).
         """
-        state_identifier = str(sample(range(1, 29), 1)[0])
+        state_identifier = str(sample(self.state_identifiers, 1)[0])
         return state_identifier.zfill(2)
