@@ -45,6 +45,13 @@ jobs:
 
       - uses: astral-sh/setup-uv@v7
 
+      - name: Build
+        run: uv build
+
+      - name: Publish
+        run: uv publish --trusted-publishing always
+
+      # Por último: a tag é o que marca a versão como publicada.
       - name: Cria release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,9 +60,3 @@ jobs:
           gh release create "v${VERSION}" \
             --title "v${VERSION}" \
             --generate-notes
-
-      - name: Build
-        run: uv build
-
-      - name: Publish
-        run: uv publish --trusted-publishing always
