@@ -2,7 +2,7 @@
   "default": true,
   "heading-style": { "style": "atx" },
   "ul-style": { "style": "dash" },
-  "line-length": { "line_length": 100 },
+  "line-length": { "line_length": 100, "tables": false },
   "no-duplicate-heading": { "allow_different_nesting": true },
   "no-trailing-punctuation": { "punctuation": ".,;:!" },
   "no-blanks-blockquote": false,
