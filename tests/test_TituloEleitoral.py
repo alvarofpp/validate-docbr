@@ -54,3 +54,15 @@ class TestTituloEleitoral(unittest.TestCase):
 
             # Then
             self.assertEqual(doc_validated, is_valid)
+
+    def test_generate_reaches_all_state_identifiers(self):
+        # Given
+        expected_identifiers = {str(uf).zfill(2) for uf in range(1, 29)}
+
+        # When
+        generated_identifiers = {
+            self.titulo_eleitoral.generate()[8:10] for _ in range(3000)
+        }
+
+        # Then
+        self.assertEqual(generated_identifiers, expected_identifiers)

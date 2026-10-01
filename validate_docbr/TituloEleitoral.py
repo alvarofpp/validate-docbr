@@ -142,7 +142,7 @@ class TituloEleitoral(DocumentBase):
         """Gera um identificador de estado válido.
 
         Returns:
-            Identificador de estado com 2 dígitos (``01`` a ``18``).
+            Identificador de estado com 2 dígitos (``01`` a ``28``).
         """
-        state_identifier = str(sample(range(1, 19), 1)[0])
+        state_identifier = str(sample(range(1, 29), 1)[0])
         return state_identifier.zfill(2)
