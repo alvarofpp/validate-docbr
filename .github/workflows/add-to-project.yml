@@ -1,8 +1,9 @@
+---
 name: Add to project
 
 on:
   issues:
-    types: [opened]
+    types: [ opened ]
 
 jobs:
   add:
