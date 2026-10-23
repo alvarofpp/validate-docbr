@@ -35,6 +35,7 @@ Documentos que estão no pacote:
   Cadastro que permite cidadãos brasileiros votar;
 - [RENAVAM](validate_docbr/RENAVAM.py): Registro Nacional de
   Veículos Automotores;
+- [Passaporte](validate_docbr/Passaporte.py): Passaporte Brasileiro;
 - [Certidão](validate_docbr/Certidao.py): Certidão de
   Nascimento/Casamento/Óbito.
 
