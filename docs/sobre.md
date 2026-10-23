@@ -13,4 +13,5 @@ Documentos que estão no pacote:
 - PIS: PIS/NIS/PASEP/NIT;
 - Título Eleitoral: Cadastro que permite cidadãos brasileiros votar;
 - RENAVAM: Registro Nacional de Veículos Automotores;
+- Passaporte: Passaporte Brasileiro;
 - Certidão: Certidão de Nascimento/Casamento/Óbito.

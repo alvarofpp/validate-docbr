@@ -2,7 +2,7 @@
 
 > Pacote Python para validação de documentos brasileiros.
 
-- Validação de CPF, CNPJ, CNH, CNS, PIS, Título Eleitoral, RENAVAM e Certidão
+- Validação de CPF, CNPJ, CNH, CNS, PIS, Título Eleitoral, RENAVAM, Passaporte e Certidão
 - Geração de documentos válidos para testes
 - Formatação com máscara
 
